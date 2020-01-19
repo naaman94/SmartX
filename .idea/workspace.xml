@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/../config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/migrations/2019_12_23_114832_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/migrations/2019_12_23_114832_create_items_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +167,7 @@
       <workItem from="1579340133787" duration="25456000" />
       <workItem from="1579413830827" duration="599000" />
       <workItem from="1579417137752" duration="19000" />
+      <workItem from="1579417365482" duration="6791000" />
     </task>
     <servers />
   </component>
@@ -178,21 +183,21 @@
       <screen x="63" y="27" width="1857" height="1053" />
     </state>
     <state x="702" y="27" width="559" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577649064679" />
-    <state x="727" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579345647707">
+    <state x="727" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579417981840">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="724" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577994222586" />
-    <state x="727" y="310" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579345647707" />
+    <state x="727" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417981840" />
     <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog" timestamp="1579345738304">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="323" y="478" width="399" height="149" key="NewPhpFileDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577484970308" />
     <state x="326" y="478" key="NewPhpFileDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579345738304" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579417144556">
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579417367209">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417144556" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417367209" />
     <state x="558" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577995464108">
       <screen x="63" y="27" width="1857" height="1053" />
     </state>

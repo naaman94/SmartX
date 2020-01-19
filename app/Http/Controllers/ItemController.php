@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Item;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
-
+use Illuminate\Validation\Rule;
+use Image;
 class ItemController extends Controller
 {
     public function __construct()
@@ -44,24 +44,25 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        $filename = "no_img_item.jpg";
+        $attributes = request()->validate([
+            'sku' => ['required','unique:items', 'min:3'],
+            'name' => ['required', 'min:3'],
+            'description' => ['required', 'min:3'],
+            'price' => ['required', 'numeric','integer' ],
+            'discount' => ['nullable','numeric','between:0,100'],
+            'status'=>['required','string'],
+            'category_id'=>['required'],
+
+        ]);
+        $attributes['views'] = 0;
+        $attributes['image'] = "no_img_item.jpg";
         if ($request->hasfile('image')) {
             $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/uploads/items_img/' . $filename));
+            $attributes['image']  = time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image'] ));
         }
-        Item::create([
-            'sku' => $request->sku,
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $filename,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'views' =>0,
-            'status' => $request->status,
-            'category_id' => $request->category_id,
-]);
+        Item::create($attributes);
+        
     }
 
     /**

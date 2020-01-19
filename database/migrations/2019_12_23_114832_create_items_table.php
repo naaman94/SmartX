@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('image')->default("no_img_item.jpg");
             $table->float('price');
             $table->decimal('discount');
-            $table->bigInteger('views');
+            $table->bigInteger('views')->default('0');
             $table->string('status')->default('Available');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');

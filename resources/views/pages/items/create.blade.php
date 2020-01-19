@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <form method="post" action="{{route('item.store')}}">
+        <form method="post" action="{{route('item.store')}}" enctype="multipart/form-data" >
             @csrf
 
             <div class="form-group">
@@ -30,9 +30,9 @@
                 <textarea rows="3" name="description" type="text"
                           class="form-control input {{ $errors->has('description') ? 'is-invalid ' : '' }}"
                           id="description"
-                          placeholder="Do you have any notes ? Please  tell us .. ">{{ old('description') }}</textarea>
+                       >{{ old('description') }}</textarea>
             </div>
-k
+
             <div class="form-group row">
                 <label class="col-form-label" for="Category_name">Price</label>
                 <input name="price" type="text" class="form-control
@@ -48,37 +48,37 @@ k
             </div>
 
             <div class="form-group row">
-                <label for="status"
-                       class="col-md-4 col-form-label text-md-right">Status</label>
-                <div class="col-md-6">
+                <label class="col-form-label" for="Category_name">Status</label>
                     <select name="status" class="custom-select" id="status">
                         <option selected value="'Avalibale">'Avalibale</option>
                         <option value="Coming Soon">Coming Soon</option>
                         <option value="Out of Stock">Out of Stock</option>
                     </select>
-                </div>
             </div>
 
+
+
             <div class="form-group row">
-                <label for="category"
-                       class="col-md-4 col-form-label text-md-right">Category</label>
-                <div class="col-md-6">
-                    <select name="category" class="custom-select" id="category">
+                <label for="category_id"
+                       class="col-form-label">Category</label>
+                    <select name="category_id" class="custom-select" id="category_id">
                         @foreach($categories as $category)
-                            <option value="'{{$category->id}}">'{{$category->name}}</option>
+                            <option value={{$category->id}}>'{{$category->name}}</option>
                         @endforeach
                     </select>
-                </div>
             </div>
 
 
             <div class="form-group row">
                 <label class="col-form-label" for="image">Image</label>
                 <div class="custom-file">
-                    <input type="file" name="image" class="custom-file-input" id="image">
-                    <label class="custom-file-label" for="image">Choose file</label>
+                    <input type="file" accept="image/x-png,image/gif,image/jpeg" name="image" class="custom-file-input {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image">
+                    <label id="imageLabel" class="custom-file-label" for="image">Choose file</label>
                 </div>
             </div>
+
+
+
 
 
             @if ($errors->any())
@@ -98,7 +98,7 @@ k
                 </div>
             @endif
 
-            <button type="submit" class="btn btn-primary float-right">Add</button>
+            <button type="submit" class="btn btn-success float-right"> <i class="fas fa-plus"></i> Create</button>
 
         </form>
 
