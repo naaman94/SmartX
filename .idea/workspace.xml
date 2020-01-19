@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="" />
+    <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +22,9 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -157,6 +162,7 @@
       <workItem from="1578672110565" duration="2620000" />
       <workItem from="1579340133787" duration="25456000" />
       <workItem from="1579413830827" duration="599000" />
+      <workItem from="1579417137752" duration="19000" />
     </task>
     <servers />
   </component>
@@ -182,11 +188,11 @@
     </state>
     <state x="323" y="478" width="399" height="149" key="NewPhpFileDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577484970308" />
     <state x="326" y="478" key="NewPhpFileDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579345738304" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579414482211">
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579417144556">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579414482211" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417144556" />
     <state x="558" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577995464108">
       <screen x="63" y="27" width="1857" height="1053" />
     </state>
