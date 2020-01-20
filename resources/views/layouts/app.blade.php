@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d2e80c593a.js" crossorigin="anonymous"></script>
 
+        @yield('header')
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -126,7 +127,7 @@
                                         <i class="fas fa-boxes"></i> Orders
                                     </a>
 
-                                    <a class="dropdown-item"  href="/category">
+                                    <a class="dropdown-item"  href="/admin/items">
                                         <i class="fas fa-store-alt"></i> items
                                     </a>
 

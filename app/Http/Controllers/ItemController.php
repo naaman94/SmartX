@@ -21,10 +21,17 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $data = Item::all();
-        return view('pages.items.all_items', compact("data"));
+        $categories = Category::all();
+        $items=Item::all();
+        return view('pages.items.index', compact(["categories","items"]));
     }
 
+    public function admin_index()
+    {
+        $categories = Category::all();
+        $items=Item::all();
+        return view('pages.items.admin_index', compact(["categories","items"]));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,7 +59,6 @@ class ItemController extends Controller
             'discount' => ['nullable','numeric','between:0,100'],
             'status'=>['required','string'],
             'category_id'=>['required'],
-
         ]);
         $attributes['views'] = 0;
         $attributes['image'] = "no_img_item.jpg";
@@ -62,7 +68,8 @@ class ItemController extends Controller
             Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image'] ));
         }
         Item::create($attributes);
-        
+        return redirect()->route('item.admin_index');
+
     }
 
     /**
@@ -71,9 +78,10 @@ class ItemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Item $item)
     {
-        return view('pages.items.show_item', ['data' => Item::findOrFail($id)]);
+        $categories = Category::all();
+        return view('pages.items.show',compact(["categories","item"]));
     }
 
     /**
@@ -82,9 +90,10 @@ class ItemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Item $item)
     {
-        return view('pages.items.edit', ['data' => Item::findOrFail($id)]);
+        $categories = Category::all();
+        return view('pages.items.edit',compact(["categories","item"]));
     }
 
     /**
@@ -96,26 +105,31 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $filename = $request->file('image')->getClientOriginalName();
-        if ( $filename!="no_img_item.jpg"&& $filename!=item::find($id)->get()->image) {//ok here chech the get function
-          //delete the old image
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/uploads/items_img/' . $filename));
+        $attributes = request()->validate([
+            'sku' => ['required', Rule::unique('items')->ignore($id), 'min:3'],
+            'name' => ['required', 'min:3'],
+            'description' => ['required', 'min:3'],
+            'price' => ['required', 'numeric','integer' ],
+            'discount' => ['nullable','numeric','between:0,100'],
+            'status'=>['required','string'],
+            'category_id'=>['required'],
+        ]);
+        $attributes['views'] = 0;
+        if($request->image==null){
+            $attributes['image'] ="no_img_item.jpg";
+        }else
+        {
+            $attributes['image'] = $request->file('image')->getClientOriginalName();
+            if ( $attributes['image']!="no_img_item.jpg"&& $attributes['image']!=item::find($id)->get()->image) {//ok here chech the get function
+                //delete the old image
+                $image = $request->file('image');
+                $attributes['image'] = time() . '.' . $image->getClientOriginalExtension();
+                Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image']));
+            }
         }
 
-        Item::find($id)->update([
-            'sku' => $request->sku,
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $filename,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'views' => $request->views,
-            'status' => $request->status,
-            'category_id' => $request->category_id,
-        ]);
-        return redirect()->route('item.show', ['id' => $id]);
+        Item::find($id)->update($attributes);
+        return redirect()->route('item.admin_index');
     }
 
     /**
@@ -127,7 +141,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
         Item::destroy($id);
-        return redirect()->route('item.index');
+        return redirect()->route('item.admin_index');
 
 //        return redirect('News')->with('success', 'Data is successfully deleted');
     }

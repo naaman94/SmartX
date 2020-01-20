@@ -10,7 +10,7 @@ class Category extends Model
         'name', 'description'
     ];
     public function item (){
-        return $this->belongsTo('App\Item');
+        return $this->hasMany('App\Item');
         // belongTo that mean from child to parents
     }
 }

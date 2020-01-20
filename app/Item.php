@@ -14,6 +14,6 @@ class Item extends Model
         // belongTo that mean from child to parents
     }
     public function category (){
-        return $this->hasOne('App\Category'); // name of model
+        return $this->belongsTo('App\Category'); // name of model
     }
 }

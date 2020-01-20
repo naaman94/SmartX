@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/../config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../database/migrations/2019_12_23_114832_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/migrations/2019_12_23_114832_create_items_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Item.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/all_items.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/show_item.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,9 +138,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -168,6 +180,9 @@
       <workItem from="1579413830827" duration="599000" />
       <workItem from="1579417137752" duration="19000" />
       <workItem from="1579417365482" duration="6791000" />
+      <workItem from="1579425100042" duration="5000" />
+      <workItem from="1579443108536" duration="892000" />
+      <workItem from="1579465477643" duration="22433000" />
     </task>
     <servers />
   </component>
@@ -188,29 +203,42 @@
     </state>
     <state x="724" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577994222586" />
     <state x="727" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417981840" />
-    <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog" timestamp="1579345738304">
+    <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog" timestamp="1579503321669">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="323" y="478" width="399" height="149" key="NewPhpFileDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577484970308" />
-    <state x="326" y="478" key="NewPhpFileDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579345738304" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579417367209">
+    <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579503321669" />
+    <state x="482" y="187" key="SettingsEditor" timestamp="1579498763937">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1579498763937" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579465477935">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579417367209" />
-    <state x="558" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577995464108">
-      <screen x="63" y="27" width="1857" height="1053" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465477935" />
+    <state x="561" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579472959838">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="558" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/63.27.1857.1053@63.27.1857.1053" timestamp="1577995464108" />
+    <state x="561" y="162" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1579472959838" />
     <state x="163" y="125" width="1657" height="855" key="dock-window-1" timestamp="1577695878070">
       <screen x="63" y="27" width="1857" height="1053" />
     </state>
     <state x="163" y="125" width="1657" height="855" key="dock-window-1/63.27.1857.1053@63.27.1857.1053" timestamp="1577695878070" />
+    <state x="737" y="425" width="714" height="301" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1579465494034">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="737" y="425" width="714" height="301" key="org.intellij.images.editor.actions.BackgroundImageDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465494034" />
     <state x="658" y="253" key="run.anything.popup" timestamp="1579363378592">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="655" y="253" key="run.anything.popup/63.27.1857.1053@63.27.1857.1053" timestamp="1577992961372" />
     <state x="658" y="253" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579363378592" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1579472914612">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579472914612" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -222,7 +250,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/../resources/views/layouts/app.blade.php</url>
-          <line>143</line>
+          <line>144</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

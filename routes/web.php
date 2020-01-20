@@ -11,13 +11,10 @@
 |
 */
 Route::get('/', 'NewsController@index');
-
-
 Auth::routes();
-
 route::resource('category','CategoryController');
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
 route::resource('item','ItemController');
 route::resource('order','OrderController');
 route::resource('news','NewsController');
