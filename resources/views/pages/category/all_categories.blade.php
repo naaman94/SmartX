@@ -2,19 +2,18 @@
 
 @section('content')
     <div class="container">
+        @if(session("message"))
+            <div class="alert alert-success">
+                <p class="text-monospace text-center">{{session("message")}}</p>
+            </div>
+        @endif
+
         <div class="row justify-content-between">
             <h1 class="col-4"><i class="fas fa-list-ul"></i> All Categories</h1>
             <a class="btn btn-success my-1 " href="/category/create"><i class="fas fa-plus"></i> Add</a>
         </div>
 
         <div class="row  mt-4">
-        @if(session("massage"))
-            <p class="text-monospace text-success">{{session("massage")}}</p>
-        @endif
-        @if(session("massage_delete"))
-            <p class="text-center text-monospace text-danger">{{session("massage_delete")}}</p>
-        @endif
-
         @if(!$categories->isEmpty())
             <table class="table">
                 <thead class="thead-dark">

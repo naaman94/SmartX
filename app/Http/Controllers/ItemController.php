@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Item;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Image;
@@ -51,6 +52,8 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+         return $request->all();
+
         $attributes = request()->validate([
             'sku' => ['required','unique:items', 'min:3'],
             'name' => ['required', 'min:3'],
@@ -68,6 +71,7 @@ class ItemController extends Controller
             Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image'] ));
         }
         Item::create($attributes);
+        session()->flash("message", "{$request->name} item has been created.");
         return redirect()->route('item.admin_index');
 
     }
@@ -92,6 +96,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
+        $this->authorize('update',$item);
         $categories = Category::all();
         return view('pages.items.edit',compact(["categories","item"]));
     }
@@ -103,10 +108,11 @@ class ItemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Item $item)
     {
+        $this->authorize('update',$item);
         $attributes = request()->validate([
-            'sku' => ['required', Rule::unique('items')->ignore($id), 'min:3'],
+            'sku' => ['required', Rule::unique('items')->ignore($item->id), 'min:3'],
             'name' => ['required', 'min:3'],
             'description' => ['required', 'min:3'],
             'price' => ['required', 'numeric','integer' ],
@@ -116,20 +122,20 @@ class ItemController extends Controller
         ]);
         $attributes['views'] = 0;
         if($request->image==null){
-            $attributes['image'] ="no_img_item.jpg";
+            $attributes['image'] =$request->org_image;
         }else
         {
             $attributes['image'] = $request->file('image')->getClientOriginalName();
-            if ( $attributes['image']!="no_img_item.jpg"&& $attributes['image']!=item::find($id)->get()->image) {//ok here chech the get function
+            if ( $attributes['image']!="no_img_item.jpg"&& $attributes['image']!=$item->image) {//ok here chech the get function
                 //delete the old image
                 $image = $request->file('image');
                 $attributes['image'] = time() . '.' . $image->getClientOriginalExtension();
                 Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image']));
             }
         }
-
-        Item::find($id)->update($attributes);
-        return redirect()->route('item.admin_index');
+        $item->update($attributes);
+        session()->flash("message", "{$request->name} item has been successfully Edit.");
+        return redirect()->route('item.show', ['id' => $item->id]);
     }
 
     /**
@@ -138,9 +144,12 @@ class ItemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Item $item)
     {
-        Item::destroy($id);
+        $this->authorize('delete',$item);
+
+        $item->delete();
+        session()->flash("message", "Item has been Successfully Deleted.");
         return redirect()->route('item.admin_index');
 
 //        return redirect('News')->with('success', 'Data is successfully deleted');

@@ -75,14 +75,15 @@
                                     @endif
                                     <p class="card-text">{{Illuminate\Support\Str::limit($item->description, 150, ' ...')}}</p>
                                 </div>
-                                <div class="card-footer row justify-content-around">
-                                    <small class="text-muted">{{$item->status}}</small>
-                                    <small class="text-muted">
-                                        <button class="btn btn-sm btn-outline-success"><i class="fas fa-cart-plus"></i>
-                                            Add to cart
-                                        </button>
-                                    </small>
-
+                                <div class="card-footer ">
+                                    <div class="row justify-content-around">
+                                        <small class="text-muted">{{$item->status}}</small>
+                                        <small class="text-muted">
+                                            <button class="btn btn-sm btn-outline-success"><i class="fas fa-cart-plus"></i>
+                                                Add to cart
+                                            </button>
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>

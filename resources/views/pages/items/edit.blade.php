@@ -8,14 +8,22 @@
 
     <div class="container">
 
-        <form method="post" action="{{route('item.update',['id' => $item->id])}}">
+        <form method="post" enctype="multipart/form-data" action="{{route('item.update',['id' => $item->id])}}">
             @method('PUT')
             @csrf
 
             <div class="form-group">
-                <h1 class="text-primary">Add Items</h1>
+                <h1 class="text-primary">Edit Items</h1>
             </div>
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group row">
                 <label class="col-form-label" for="Category_name">SKU</label>
                 <input name="sku" type="text" class="form-control
@@ -54,12 +62,11 @@
             <div class="form-group row">
                 <label class="col-form-label" for="Category_name">Status</label>
                 <select value="{{ old('status',$item->status ) }}" name="status" class="custom-select" id="status">
-                    <option selected value="'Avalibale">'Avalibale</option>
+                    <option selected value="'Avalibale">Avalibale</option>
                     <option value="Coming Soon">Coming Soon</option>
                     <option value="Out of Stock">Out of Stock</option>
                 </select>
             </div>
-
 
             <div class="form-group row">
                 <label for="category_id"
@@ -67,40 +74,28 @@
                 <select name="category_id" class="custom-select" id="category_id"
                         value="{{ old('category_id',$item->category_id ) }}">
                     @foreach($categories as $category)
-                        <option value={{$category->id}}>'{{$category->name}}</option>
+                        <option value={{$category->id}}>{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
-
             <div class="form-group row">
                 <label class="col-form-label" for="image">Image</label>
                 <div class="custom-file">
-                    <input type="file" accept="image/x-png,image/gif,image/jpeg" name="image"
+                    <input type="hidden" value="{{ old('image',$item->image ) }}" name="org_image">
+                    <input type="file" accept="image/*" name="image" onchange="loadFile(event)"
+                           value="{{ old('image') }}"
                            class="custom-file-input {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image">
-                    <label id="imageLabel" class="custom-file-label" for="image">Choose file</label>
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                 </div>
             </div>
-
-
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissable">
-                    <div class="alertwrapper clearfix">
-                        <div class="alerticon dangerous">
-                            <span class="glyphicon glyphicon-warning-sign"></span>
-                        </div>
-                        <div class="alertcontent">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
+            <script>
+                var loadFile = function (event) {
+                    var image = document.getElementById('output');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                };
+            </script>
+            <img id="output" width="200" src="/uploads/items_img/{{$item->image}}"/>
             <button type="submit" class="btn btn-success float-right"><i class="fas fa-plus"></i> Edit Item</button>
-
         </form>
 
     </div>

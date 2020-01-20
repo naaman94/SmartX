@@ -2,21 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/Policies/itemPolicy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579556355.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579556363.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579556371.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579556378.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579558824.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579558884.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579561209.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/items_img/1579562261.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/uploads/users_img/1579545568.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Category.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/ItemController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/all_items.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/category/all_categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/category/all_categories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/category/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/category/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/category/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/category/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/show_item.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +41,8 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="index" />
+        <option value="Blade" />
       </list>
     </option>
   </component>
@@ -131,18 +140,27 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1VNmBwFRjQBya7PF4ICNbzLDIvb" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="open ~/Desktop/SmartX/." />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -182,18 +200,34 @@
       <workItem from="1579417365482" duration="6791000" />
       <workItem from="1579425100042" duration="5000" />
       <workItem from="1579443108536" duration="892000" />
-      <workItem from="1579465477643" duration="22433000" />
+      <workItem from="1579465477643" duration="25042000" />
+      <workItem from="1579542018647" duration="15019000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="449" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577480738804">
       <screen x="63" y="27" width="1857" height="1053" />
     </state>
     <state x="449" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577480738804" />
+    <state x="664" y="504" width="637" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579512375613">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="664" y="504" width="637" height="390" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1579512375613" />
+    <state x="604" y="321" width="768" height="757" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1579512506643">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="604" y="321" width="768" height="757" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579512506643" />
+    <state x="782" y="240" width="441" height="624" key="#com.intellij.ide.util.MemberChooser" timestamp="1579512841232">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="782" y="240" width="441" height="624" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1579512841232" />
     <state x="702" y="27" width="559" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1577649064679">
       <screen x="63" y="27" width="1857" height="1053" />
     </state>
@@ -208,15 +242,15 @@
     </state>
     <state x="323" y="478" width="399" height="149" key="NewPhpFileDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577484970308" />
     <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579503321669" />
-    <state x="482" y="187" key="SettingsEditor" timestamp="1579498763937">
+    <state x="482" y="187" key="SettingsEditor" timestamp="1579555084293">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1579498763937" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579465477935">
+    <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1579555084293" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579542022770">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465477935" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579542022770" />
     <state x="561" y="162" width="857" height="781" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579472959838">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -230,15 +264,15 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="737" y="425" width="714" height="301" key="org.intellij.images.editor.actions.BackgroundImageDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465494034" />
-    <state x="658" y="253" key="run.anything.popup" timestamp="1579363378592">
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup" timestamp="1579545617758">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="655" y="253" key="run.anything.popup/63.27.1857.1053@63.27.1857.1053" timestamp="1577992961372" />
-    <state x="658" y="253" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579363378592" />
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1579472914612">
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579545617758" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1579562160653">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579472914612" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579562160653" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

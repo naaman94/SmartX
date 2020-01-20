@@ -57,7 +57,7 @@ class CategoryController extends Controller
         ]);
 
         Category::create($attributes);
-        session()->flash("massage", "{$request->name} category has been created.");
+        session()->flash("message", "{$request->name} category has been created.");
         return redirect()->route('category.index');
     }
 
@@ -98,7 +98,7 @@ class CategoryController extends Controller
             'description' => ['required', 'min:3']
         ]);
         Category::find($id)->update($attributes);
-        session()->flash("massage", "{$request->name} category has been successfully Edit.");
+        session()->flash("message", "{$request->name} category has been successfully Edit.");
 
         return redirect()->route('category.index');//no it will redirect to edit with same id
     }
@@ -112,7 +112,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        session()->flash("massage_delete", "Category has been successfully Deleted.");
+        session()->flash("message", "Category has been successfully Deleted.");
         return redirect()->route('category.index');
     }
 }

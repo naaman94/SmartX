@@ -7,8 +7,14 @@
 
 @section('content')
     <div class="container">
+        @if(session("message"))
+            <div class="alert alert-success">
+                <p class="text-monospace text-center">{{session("message")}}</p>
+            </div>
+        @endif
+
         <div class="row justify-content-between">
-            <h1 class="col-6"> Admin Items dashboard </h1>
+            <h1 class="col-6"> <i class="fas fa-store-alt"></i> Admin Items dashboard </h1>
             <a class="btn btn-success my-1" href="/item/create"><i class="fas fa-plus"></i> Add item</a>
         </div>
         @foreach($items  as $item)
