@@ -15,9 +15,10 @@ Auth::routes();
 route::resource('category','CategoryController');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
+Route::get('/myCart', 'CardController@index');
 route::resource('item','ItemController');
 route::resource('order','OrderController');
 route::resource('news','NewsController');
-route::resource('card','CardController')->middleware('admin','auth');
+route::resource('card','CardController');
 //Route::group(['middleware'=>['auth','admin']],function (){
 // });

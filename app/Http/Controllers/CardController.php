@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Item;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,47 +14,62 @@ class CardController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
-//        $user_id = Auth::id();
-//        $data = card::all();
-//        $news = News::all()->take(10);//return the top news art
-//        return view('pages.category.all_categories', compact("$data"));
+        $cards = Order::whereUser_id(Auth::id())->whereStatus("cart")->first()->card;
+        $total['qnt'] = 0;
+        $total['price'] = 0;
+        $total['after_dis'] = 0;
+        foreach ($cards as $card) {
+            $total['qnt'] += $card->quantity;
+            $total['price'] += $card->quantity * $card->item->price;
+            $total['after_dis']+= $card->quantity*($card->item->price - $card->item->price * $card->item->discount/100);
+        }
+        $total['discount'] = $total['price']- $total['after_dis'];
+        return view('pages.user.cart',['total' =>$total,'cards'=>$cards]);
     }
 
     public function store(Request $request)
-    {   $user = Auth::user();
-        $order = Order::firstOrCreate(['user_id' => $user->id, 'state' => 'awaiting'],
+
+    {
+        $attributes = request()->validate([
+            'item_id' => ['required', 'exists:items,id'],
+            'quantity' => ['required', 'numeric', 'between:0,100'],
+        ]);
+        $user = Auth::user();
+        $order = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
             ['country' => $user->country,
-            'city' => $user->city,
-            'state' => $user->state,
-            'address' => $user->address,
-            'phone' => $user->phone,
-        ]);
+                'city' => $user->city,
+                'state' => $user->state,
+                'address' => $user->address,
+                'phone' => $user->phone,
+            ]);
+        $attributes['order_id'] = $order->id;
+        Card::create($attributes);
 
-        Card::create([
-            'item_id' => $request->item_id,
-            'quantity' => $request->quantity,
-            'order_id'=>$order->id
-        ]);
-        return back()->withInput();
+        return redirect()->route('card.index');
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Card $card)
     {
-        Card::find($id)->update([
-            'item_id' => $request->item_id,
-            'quantity' => $request->quantity,
-            'order_id'=>$request->order_id]);
-        return back()->withInput();
+        $attributes = request()->validate([
+            'quantity' => ['required', 'numeric', 'between:0,100'],
+        ]);
+        if ($attributes['quantity']==0)
+        {
+            $card->delete();
+
+        }
+        $card->update(['quantity' => $attributes['quantity']]);
+        return redirect()->route('card.index');
     }
 
-    public function destroy($id)
+    public function destroy(Card $card)
     {
-        Card::destroy($id);
-        return back()->withInput();
-//        return redirect('News')->with('success', 'Data is successfully deleted');
+        $card->delete();
+        return redirect()->route('card.index');
     }
 
 }

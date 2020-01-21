@@ -52,9 +52,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-         return $request->all();
-
-        $attributes = request()->validate([
+         $attributes = request()->validate([
             'sku' => ['required','unique:items', 'min:3'],
             'name' => ['required', 'min:3'],
             'description' => ['required', 'min:3'],

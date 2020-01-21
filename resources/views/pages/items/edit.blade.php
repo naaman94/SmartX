@@ -62,7 +62,7 @@
             <div class="form-group row">
                 <label class="col-form-label" for="Category_name">Status</label>
                 <select value="{{ old('status',$item->status ) }}" name="status" class="custom-select" id="status">
-                    <option selected value="'Avalibale">Avalibale</option>
+                    <option selected value="Available">Available</option>
                     <option value="Coming Soon">Coming Soon</option>
                     <option value="Out of Stock">Out of Stock</option>
                 </select>

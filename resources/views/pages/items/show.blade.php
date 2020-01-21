@@ -6,6 +6,16 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="container">
 
         @if(session("message"))
@@ -15,6 +25,7 @@
         @endif
 
         <div class="row">
+
             <div class="col-lg-9">
                 <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="/uploads/items_img/{{$item->image}}" height="700"
@@ -38,14 +49,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-3 mt-4">
+
                 <div class="justify-content-between">
                     <h4 class="col" style="display: inline ">Price :</h4>
                     @if($item->discount==0)
                         <h5 id="price" class="col" style="display: inline ">{{$item->price}} JOD</h5>
                     @else
                         <div class="col" style="display: inline ">
-                            <h5 style="text-decoration: line-through;display: inline">{{$item->price}} JD</h5>
+                            <h6 style="text-decoration: line-through;display: inline">{{$item->price}} JD</h6>
                             <h5 id="price"
                                 style="display: inline ; color: red">{{$item->price-$item->price*$item->discount/100}}
                                 JD</h5>
@@ -53,19 +66,25 @@
                     @endif
                 </div>
                 <br>
-                <div class="justify-content-between">
-                    <h5 class="col-1 align-self-start" style="display: inline">Quantity :</h5>
-                    <input class="col-4 align-self-end" onchange="myFunction()" type="number" id="qnt" value="1"
-                           name="quantity" min=1 max=25>
-                </div>
-                <hr>
-                <h4 class="col" style="display: inline ">Total Price </h4>
-                <h5 id="T_prise" class="col" style="display: inline "></h5>
-
-                <button type="button" class="btn btn-outline-success btn-lg btn-block mt-2"><i
-                        class="fas fa-cart-plus"></i> Add to Cart
-                </button>
-
+                @if($item->status==="Available")
+                    <form class=" " method='post' action='{{route('card.store')}}'>
+                        @csrf
+                        <div class="justify-content-between">
+                            <h5 class="col-1 align-self-start" style="display: inline">Quantity :</h5>
+                            <input class="col-4 align-self-end" onchange="myFunction()" type="number" id="qnt" value="1"
+                                   name="quantity" min=1 max=100>
+                        </div>
+                        <hr>
+                        <h4 class="col" style="display: inline ">Total Price </h4>
+                        <h5 id="T_prise" class="col" style="display: inline "></h5>
+                        <input type="hidden" value="{{$item->id}}" name="item_id">
+                        <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-2"><i
+                                class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </form>
+                    @else
+                    <h4 class="col">{{$item->status}} </h4>
+                @endif
                 <br>
                 @can('viewAny',App\Item::class)
                     <div>
@@ -75,7 +94,7 @@
                             @method('delete')
                             @csrf
                             <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete {{$item->name}} category ?')"
+                                    onclick="return confirm('Are you sure you want to delete {{$item->name}} ')"
                                     class="float-right btn btn-danger btn-lg btn-block my-1"><i
                                     class="far fa-trash-alt"></i>
                                 Delete

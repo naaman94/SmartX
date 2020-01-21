@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d2e80c593a.js" crossorigin="anonymous"></script>
 
-        @yield('header')
+@yield('header')
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/NavBar.css') }}" rel="stylesheet">
 
@@ -107,7 +107,7 @@
                         @endif
                     @else
                         @if (Auth::user()->isAdmin())
-                             <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class=" text-capitalize nav-link dropdown-toggle" href="#"
                                    role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -119,22 +119,25 @@
                                         <i class="fas fa-crown"></i> Admin Dashboard
                                     </a>
 
-                                    <a class="dropdown-item"  href="/category">
+                                    <a class="dropdown-item" href="/category">
                                         <i class="fas fa-list-ul"></i> Categories
                                     </a>
 
-                                    <a class="dropdown-item"  href="/category">
+                                    <a class="dropdown-item" href="/category">
                                         <i class="fas fa-boxes"></i> Orders
                                     </a>
 
-                                    <a class="dropdown-item"  href="/admin/items">
+                                    <a class="dropdown-item" href="/admin/items">
                                         <i class="fas fa-store-alt"></i> items
                                     </a>
 
                                 </div>
-
-                             </li>
+                            </li>
                         @endif
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{{ route('card.index') }}">
+                                <i class="fas fa-shopping-cart"></i> My Cart</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class=" text-capitalize nav-link dropdown-toggle" href="#"
                                role="button"

@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('state');
             $table->string('address');
             $table->string('phone');
-            $table->string('status')->default('card');
+            $table->string('status')->default('cart');
             $table->timestamps();
 
 //            $table->unsignedBigInteger('item_id');

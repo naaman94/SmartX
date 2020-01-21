@@ -12,7 +12,7 @@ class Item extends Model
 
 
     public function card (){
-        return $this->belongsTo('App\Card'); // name of model
+        return $this->hasMany('App\Card'); // name of model
         // belongTo that mean from child to parents
     }
     public function category (){

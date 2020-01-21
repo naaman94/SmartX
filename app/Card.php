@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
+    protected $guarded = [];
+
     public function order (){
-        return $this->belongsTo('App\Order'); // name of model
+        return $this->hasOne('App\Order'); // name of model
         // belongTo that mean from child to parents
     }
     public function item (){
-        return $this->hasOne('App\Item'); // name of model
+        return $this->belongsTo('App\Item'); // name of model
     }
 }
