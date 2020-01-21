@@ -25,11 +25,9 @@
         @endif
 
         <div class="row">
-
             <div class="col-lg-9">
                 <div class="card mt-4">
-                    <img class="card-img-top img-fluid" src="/uploads/items_img/{{$item->image}}" height="700"
-                         width="525" alt="">
+                    <img class="card-img-top img-fluid" src="/storage/items_img/{{$item->image}}" alt="">
                     <div class="card-body">
                         <h3 class="card-title">{{$item->name}}</h3>
                         <h6>Category : {{$item->category->name}}</h6>
@@ -42,16 +40,20 @@
                             <h5 class="p-1 my-2" style="display:inline; color: red ; border:2px solid red;"> you
                                 save {{intval($item->discount)}} % </h5>
                         @endif
-                        <br>
+                        <div class="row justify-content-between">
+                            <small class="col">{{$item->status}}</small>
+                            <small class="col mr-2 text-right"> SKU : {{$item->sku}}</small>
+                        </div>
                         <hr>
                         <br>
+                        <h4>Description :</h4>
+
                         <p class="card-text">{{$item->description}}</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-3 mt-4">
-
                 <div class="justify-content-between">
                     <h4 class="col" style="display: inline ">Price :</h4>
                     @if($item->discount==0)
@@ -67,22 +69,28 @@
                 </div>
                 <br>
                 @if($item->status==="Available")
-                    <form class=" " method='post' action='{{route('card.store')}}'>
-                        @csrf
-                        <div class="justify-content-between">
-                            <h5 class="col-1 align-self-start" style="display: inline">Quantity :</h5>
-                            <input class="col-4 align-self-end" onchange="myFunction()" type="number" id="qnt" value="1"
-                                   name="quantity" min=1 max=100>
-                        </div>
-                        <hr>
-                        <h4 class="col" style="display: inline ">Total Price </h4>
-                        <h5 id="T_prise" class="col" style="display: inline "></h5>
-                        <input type="hidden" value="{{$item->id}}" name="item_id">
-                        <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-2"><i
-                                class="fas fa-cart-plus"></i> Add to Cart
-                        </button>
-                    </form>
-                    @else
+                    @if($is_in_cart==null)
+                        <form class=" " method='post' action='{{route('card.store')}}'>
+                            @csrf
+                            <div class="justify-content-between">
+                                <h5 class="col-1 align-self-start" style="display: inline">Quantity :</h5>
+                                <input class="col-4 align-self-end" onchange="myFunction()" type="number" id="qnt"
+                                       value="1"
+                                       name="quantity" min=1 max=100>
+                            </div>
+                            <hr>
+                            <h4 class="col" style="display: inline ">Total Price </h4>
+                            <h5 id="T_prise" class="col" style="display: inline "></h5>
+                            <input type="hidden" value="{{$item->id}}" name="item_id">
+                            <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-2"><i
+                                    class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
+                        @else
+                        <a class="btn btn-primary btn-lg btn-block mt-2" href="{{ route('card.index') }}">
+                            <i class="fas fa-shopping-cart"></i> View Cart</a>
+                    @endif
+                @else
                     <h4 class="col">{{$item->status}} </h4>
                 @endif
                 <br>

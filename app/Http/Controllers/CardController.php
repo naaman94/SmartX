@@ -24,10 +24,10 @@ class CardController extends Controller
         foreach ($cards as $card) {
             $total['qnt'] += $card->quantity;
             $total['price'] += $card->quantity * $card->item->price;
-            $total['after_dis']+= $card->quantity*($card->item->price - $card->item->price * $card->item->discount/100);
+            $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
         }
-        $total['discount'] = $total['price']- $total['after_dis'];
-        return view('pages.user.cart',['total' =>$total,'cards'=>$cards]);
+        $total['discount'] = $total['price'] - $total['after_dis'];
+        return view('pages.user.cart', ['total' => $total, 'cards' => $cards]);
     }
 
     public function store(Request $request)
@@ -46,19 +46,21 @@ class CardController extends Controller
                 'phone' => $user->phone,
             ]);
         $attributes['order_id'] = $order->id;
-        Card::create($attributes);
-
+        $card=Card::whereOrder_id($order->id)->whereItem_id($attributes['item_id'])->first();
+        if ($card) {
+            $card->update(['quantity' => $attributes['quantity']+$card->quantity]);
+        } else {
+            Card::create($attributes);
+        }
         return redirect()->route('card.index');
     }
-
 
     public function update(Request $request, Card $card)
     {
         $attributes = request()->validate([
             'quantity' => ['required', 'numeric', 'between:0,100'],
         ]);
-        if ($attributes['quantity']==0)
-        {
+        if ($attributes['quantity'] == 0) {
             $card->delete();
 
         }

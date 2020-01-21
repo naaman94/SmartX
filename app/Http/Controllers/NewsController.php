@@ -58,7 +58,7 @@ class NewsController extends Controller
         if ($request->hasfile('image')) {
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/uploads/news_img/' . $filename));
+            Image::make($image)->save(public_path('/storage/news_img/' . $filename));
         }
         News::create([
             'title' => $request->title,

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
 use App\Category;
 use App\Item;
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Image;
 class ItemController extends Controller
@@ -66,7 +70,7 @@ class ItemController extends Controller
         if ($request->hasfile('image')) {
             $image = $request->file('image');
             $attributes['image']  = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image'] ));
+            Image::make($image)->save(public_path('/storage/items_img/' . $attributes['image'] ));
         }
         Item::create($attributes);
         session()->flash("message", "{$request->name} item has been created.");
@@ -83,7 +87,17 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $categories = Category::all();
-        return view('pages.items.show',compact(["categories","item"]));
+        $user = Auth::user();
+        $order = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
+            ['country' => $user->country,
+                'city' => $user->city,
+                'state' => $user->state,
+                'address' => $user->address,
+                'phone' => $user->phone,
+            ]);
+        $is_in_cart=Card::whereOrder_id($order->id)->whereItem_id($item->id)->first();
+
+        return view('pages.items.show',compact(["categories","item","is_in_cart"]));
     }
 
     /**
@@ -91,6 +105,7 @@ class ItemController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Item $item)
     {
@@ -105,6 +120,7 @@ class ItemController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request,Item $item)
     {
@@ -123,12 +139,15 @@ class ItemController extends Controller
             $attributes['image'] =$request->org_image;
         }else
         {
+//            $file_path = app_path("public/storage/items_img/{$request->org_image}");
+//            if(File::exists($file_path)) dd(File::delete($file_path));
+//should delete
             $attributes['image'] = $request->file('image')->getClientOriginalName();
             if ( $attributes['image']!="no_img_item.jpg"&& $attributes['image']!=$item->image) {//ok here chech the get function
                 //delete the old image
                 $image = $request->file('image');
                 $attributes['image'] = time() . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->save(public_path('/uploads/items_img/' . $attributes['image']));
+                Image::make($image)->save(public_path('/storage/items_img/' . $attributes['image']));
             }
         }
         $item->update($attributes);

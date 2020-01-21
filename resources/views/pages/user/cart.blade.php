@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-lg-2">
                                     <a href="/item/{{$card->item_id}}">
-                                        <img class="img-fluid rounded" src="/uploads/items_img/{{$card->item->image}}"
+                                        <img class="img-fluid rounded" src="/storage/items_img/{{$card->item->image}}"
                                              alt=""
                                              height="300" width="400">
                                     </a>
@@ -53,7 +53,7 @@
                                 <div class="col-lg-2">
                                     @if($card->item->discount==0)
                                         <h5 id="price" class="col text-center"
-                                            style="display: inline ">{{$card->item->price-$card->quantity}} JOD</h5>
+                                            style="display: inline ">{{$card->item->price*$card->quantity}} JOD</h5>
                                     @else
                                         <div class="col">
                                             <h4 id="price" class="text-center font-weight-bold">

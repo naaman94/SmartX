@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Item;
 use Illuminate\Validation\Rule;
 use Image;
 use Illuminate\Http\Request;
@@ -67,9 +68,18 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cat)
     {
-        return redirect()->route('category.index');
+        if ($cat=="all_item")
+        {
+            return redirect()->route('item.index');
+
+        }
+
+        $categories = Category::all();
+        $items = Category::findOrFail($cat)->item;
+//return $items;
+        return view('pages.items.index', compact(["categories","items"]));
     }
 
     /**

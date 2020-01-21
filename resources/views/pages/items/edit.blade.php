@@ -94,7 +94,7 @@
                     image.src = URL.createObjectURL(event.target.files[0]);
                 };
             </script>
-            <img id="output" width="200" src="/uploads/items_img/{{$item->image}}"/>
+            <img id="output" width="200" src="/storage/items_img/{{$item->image}}"/>
             <button type="submit" class="btn btn-success float-right"><i class="fas fa-plus"></i> Edit Item</button>
         </form>
 

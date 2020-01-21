@@ -8,19 +8,22 @@
             <div class="col-lg-3">
                 <h1>Categories</h1>
                 <div class="list-group">
-                    <a href="/item" class="list-group-item">All items</a>
+                    <a href="/category/all_item" class="list-group-item">All items</a>
                     @foreach($categories as $category)
-                        <a href="{{$category->id}}" class="list-group-item">{{$category->name}}</a>
+                        <a href="/category/{{$category->id}}" class="list-group-item">{{$category->name}}</a>
                     @endforeach
                 </div>
             </div>
             <div class="col-lg-9">
+                @if(empty($items->toArray()))
+                    <h1 class="text-center">There is no items in this category </h1>
+                @endif
                 <div class="row">
-                    @foreach($items  as $item)
+                      @foreach($items  as $item)
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
                                 <a href="/item/{{$item->id}}">
-                                    <img class="card-img-top" src="/uploads/items_img/{{$item->image}}" alt=""
+                                    <img class="card-img-top" src="/storage/items_img/{{$item->image}}" alt=""
                                          height="200" width="150">
                                 </a>
                                 <div class="card-body">
@@ -45,9 +48,14 @@
                                 <div class="card-footer ">
                                     <div class="row justify-content-around">
                                             @if($item->status==="Available")
-                                            <button class="btn btn-sm btn-outline-success"><i class="fas fa-cart-plus"></i>
-                                                Add to cart
-                                            </button>
+                                            <form class=" " method='post' action='{{route('card.store')}}'>
+                                                @csrf
+                                                <input type="hidden" value="1" name="quantity">
+                                                <input type="hidden" value="{{$item->id}}" name="item_id">
+                                                <button type="submit" class="btn btn-sm btn-outline-success"><i
+                                                        class="fas fa-cart-plus"></i> Add to Cart
+                                                </button>
+                                            </form>
                                                 @else
                                             <small class="text-muted">{{$item->status}}</small>
                                                 @endif
