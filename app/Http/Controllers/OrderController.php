@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -15,27 +16,32 @@ class OrderController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin')->only(['edit','update','destroy']);
+        $this->middleware('admin')->only(['destroy']);
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $user_id = Auth::id();
-        $data = Order::whereUser_id($user_id)->where('status', '!=', 'card')->get();
+        $data = Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->get();
+        return $data;
 //        return view('pages.category.all_categories', compact("$data"));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        $user_id = Auth::id();
-        $data = Order::whereUser_id($user_id)->whereStatus('card')->first();
-        return view('pages.order.create');
+        $order= Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
+        $total['qnt'] = 0;
+        $total['after_dis'] = 0;
+        foreach ($order->card as $card) {
+            $total['qnt'] += $card->quantity;
+            $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
+        }
+         return view('pages.user.checkout', [ 'total' => $total,'order' => $order]);
     }
 
     /**
@@ -46,15 +52,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        Order::find($request->id)->update([
-            'country' => $request->country,
-            'city' => $request->city,
-            'state' => $request->state,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'status'=>'awaiting',
-        ]);
-        return redirect()->route('order.index');
+   return $request;
+//        return redirect()->route('order.index');
 
     }
 
@@ -87,11 +86,17 @@ class OrderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        Order::find($id)->update([
-            'status'=>$request->status
+        $attributes=request()->validate([
+            'country' => ['required', 'min:3'],
+            'state' => ['required', 'min:3'],
+            'city' => ['required', 'min:3'],
+            'address' => ['required', 'min:3'],
+            'phone' => ['required', 'numeric', 'integer'],
         ]);
+        $attributes['status']="waiting to confirm";
+        $order->update($attributes);
         return redirect()->route('order.index');
     }
 

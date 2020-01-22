@@ -9,7 +9,7 @@ class Card extends Model
     protected $guarded = [];
 
     public function order (){
-        return $this->hasOne('App\Order'); // name of model
+        return $this->belongsTo('App\Order'); // name of model
         // belongTo that mean from child to parents
     }
     public function item (){

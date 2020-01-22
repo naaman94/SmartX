@@ -8,18 +8,15 @@
             <div class="col-lg-3">
                 <h1>Categories</h1>
                 <div class="list-group">
-                    <a href="/category/all_item" class="list-group-item">All items</a>
+                    <a href="{{route("item.index",['category'=>"all_item"])}}" class="list-group-item">All items</a>
                     @foreach($categories as $category)
-                        <a href="/category/{{$category->id}}" class="list-group-item">{{$category->name}}</a>
+                        <a href="{{route("item.index",['category'=>$category->id])}}" class="list-group-item">{{$category->name}}</a>
                     @endforeach
                 </div>
             </div>
             <div class="col-lg-9">
-                @if(empty($items->toArray()))
-                    <h1 class="text-center">There is no items in this category </h1>
-                @endif
                 <div class="row">
-                      @foreach($items  as $item)
+                      @forelse($items  as $item)
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
                                 <a href="/item/{{$item->id}}">
@@ -63,7 +60,10 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                          @empty
+                        <h1 class="col text-center">There is no items in this category </h1>
+
+                    @endforelse
 
 
                 </div>

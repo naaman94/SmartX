@@ -31,7 +31,7 @@
                         <td class="text-capitalize"  style="word-wrap: break-word; max-width: 100px;">{{$category->name}}</td>
                         <td class="" style="word-wrap: break-word; max-width: 300px;">{{$category->description}}</td>
                         <td>
-                            <form class=" " method='post' action='{{route('category.destroy',['id' => $category->id])}}'>
+                            <form class=" " method='post' action='{{route('category.destroy',$category->id)}}'>
                                 @method('delete')
                                 @csrf
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete {{$category->name}} category ?')" class="float-right btn btn-danger mb-2"><i class="far fa-trash-alt"></i> Delete</button>

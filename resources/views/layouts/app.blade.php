@@ -118,18 +118,19 @@
                                     <a class="dropdown-item" href="{{ url('/Admin') }}">
                                         <i class="fas fa-crown"></i> Admin Dashboard
                                     </a>
-
                                     <a class="dropdown-item" href="/category">
                                         <i class="fas fa-list-ul"></i> Categories
                                     </a>
-
+                                    <a class="dropdown-item" href="/admin/items">
+                                        <i class="fas fa-store-alt"></i> items
+                                    </a>
+                                    <a class="dropdown-item" href="/admin/items">
+                                        <i class="far fa-newspaper"></i> News
+                                    </a>
                                     <a class="dropdown-item" href="/category">
                                         <i class="fas fa-boxes"></i> Orders
                                     </a>
 
-                                    <a class="dropdown-item" href="/admin/items">
-                                        <i class="fas fa-store-alt"></i> items
-                                    </a>
 
                                 </div>
                             </li>
@@ -146,6 +147,9 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('order.index') }}">
+                                    <i class="fas fa-boxes"></i> My Orders
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

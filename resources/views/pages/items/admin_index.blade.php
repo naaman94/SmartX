@@ -17,14 +17,14 @@
             <h1 class="col-6"> <i class="fas fa-store-alt"></i> Admin Items dashboard </h1>
             <a class="btn btn-success my-1" href="/item/create"><i class="fas fa-plus"></i> Add item</a>
         </div>
-        @foreach($items  as $item)
+        @forelse($items  as $item)
 
             <div class="card my-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3">
                             <a href="/item/{{$item->id}}">
-                                <img class="img-fluid rounded" src="/uploads/items_img/{{$item->image}}" alt=""
+                                <img class="img-fluid rounded" src="/storage/items_img/{{$item->image}}" alt=""
                                      height="300" width="400">
                             </a>
                         </div>
@@ -65,6 +65,8 @@
                 <div class="card-footer text-muted">
                     Posted on {{$item->created_at}} - Update on {{$item->updated_at}} </div>
             </div>
-        @endforeach
+            @empty
+                <h1 class="col text-center">There is no items</h1>
+            @endforelse
     </div>
 @endsection

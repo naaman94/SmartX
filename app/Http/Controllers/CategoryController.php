@@ -12,8 +12,8 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
-        $this->middleware('auth');
+        $this->middleware('admin')->except(['show']);
+        $this->middleware('auth')->except(['show']);
     }
 
     /**
@@ -68,18 +68,9 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($cat)
+    public function show($id)
     {
-        if ($cat=="all_item")
-        {
-            return redirect()->route('item.index');
 
-        }
-
-        $categories = Category::all();
-        $items = Category::findOrFail($cat)->item;
-//return $items;
-        return view('pages.items.index', compact(["categories","items"]));
     }
 
     /**
@@ -90,7 +81,6 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-//dd( Category::findOrFail($id));
          return view('pages.category.edit', ['category' => $category]);
     }
 
@@ -98,16 +88,16 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         $attributes = request()->validate([
-            'name' => ['required', Rule::unique('categories')->ignore($id), 'min:3'],
+            'name' => ['required', Rule::unique('categories')->ignore($category->id), 'min:3'],
             'description' => ['required', 'min:3']
         ]);
-        Category::find($id)->update($attributes);
+        $category->update($attributes);
         session()->flash("message", "{$request->name} category has been successfully Edit.");
 
         return redirect()->route('category.index');//no it will redirect to edit with same id
@@ -119,9 +109,9 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::destroy($id);
+        $category->delete();
         session()->flash("message", "Category has been successfully Deleted.");
         return redirect()->route('category.index');
     }

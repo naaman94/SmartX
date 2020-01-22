@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', 'NewsController@index');
-Auth::routes();
+Auth::routes(['verify'=>true]);
 route::resource('category','CategoryController');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');

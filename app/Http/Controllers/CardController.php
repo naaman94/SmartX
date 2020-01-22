@@ -17,7 +17,15 @@ class CardController extends Controller
 
     public function index()
     {
-        $cards = Order::whereUser_id(Auth::id())->whereStatus("cart")->first()->card;
+        $user=Auth::user();
+        $cards = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
+            ['country' => $user->country,
+                'city' => $user->city,
+                'state' => $user->state,
+                'address' => $user->address,
+                'phone' => $user->phone,
+            ])
+            ->card;
         $total['qnt'] = 0;
         $total['price'] = 0;
         $total['after_dis'] = 0;
