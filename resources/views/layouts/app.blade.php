@@ -127,10 +127,9 @@
                                     <a class="dropdown-item" href="/admin/items">
                                         <i class="far fa-newspaper"></i> News
                                     </a>
-                                    <a class="dropdown-item" href="/category">
+                                    <a class="dropdown-item" href="{{route('order.admin_index')}}">
                                         <i class="fas fa-boxes"></i> Orders
                                     </a>
-
 
                                 </div>
                             </li>

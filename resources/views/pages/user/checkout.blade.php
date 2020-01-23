@@ -70,8 +70,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <form class="container" method="post" action="{{route('order.update',$order)}}">
-                            @method('PUT')
+                    <form class="container" method="post" action="{{route('order.store')}}">
                             @csrf
                         <div class="row">
                             <h3>Order Address </h3>

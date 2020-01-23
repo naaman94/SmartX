@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="" />
+    <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/order/admin_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/admin_order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/user/checkout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,7 +197,8 @@
       <workItem from="1579465477643" duration="25042000" />
       <workItem from="1579542018647" duration="65101000" />
       <workItem from="1579695294868" duration="14771000" />
-      <workItem from="1579762208173" duration="12868000" />
+      <workItem from="1579762208173" duration="15534000" />
+      <workItem from="1579784183601" duration="6933000" />
     </task>
     <servers />
   </component>
@@ -224,10 +234,14 @@
     </state>
     <state x="724" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1577994222586" />
     <state x="727" y="310" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579730471574" />
-    <state x="738" y="168" width="501" height="768" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1579681923693">
+    <state x="987" y="195" width="501" height="768" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1579787770472">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="738" y="168" width="501" height="768" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/67.27.1853.1053@67.27.1853.1053" timestamp="1579681923693" />
+    <state x="987" y="195" width="501" height="768" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/67.27.1853.1053@67.27.1853.1053" timestamp="1579787770472" />
+    <state x="738" y="91" width="501" height="923" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1579788378312">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="738" y="91" width="501" height="923" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1/67.27.1853.1053@67.27.1853.1053" timestamp="1579788378312" />
     <state x="326" y="478" width="399" height="149" key="NewPhpFileDialog" timestamp="1579503321669">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -237,6 +251,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="526" y="402" width="924" height="300" key="Performance.Activity.Monitor/67.27.1853.1053@67.27.1853.1053" timestamp="1579645591439" />
+    <state x="800" y="489" width="377" height="126" key="ReplaceDuplicatesPrompt" timestamp="1579787714858">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="800" y="489" width="377" height="126" key="ReplaceDuplicatesPrompt/67.27.1853.1053@67.27.1853.1053" timestamp="1579787714858" />
     <state x="482" y="187" key="SettingsEditor" timestamp="1579645570931">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -245,11 +263,11 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="579" height="446" key="SwitcherDM/67.27.1853.1053@67.27.1853.1053" timestamp="1579681641332" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579762208349">
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579784209085">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579762208349" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579784209085" />
     <state x="561" y="162" width="944" height="789" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579725778468">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -267,11 +285,11 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="737" y="425" width="714" height="301" key="org.intellij.images.editor.actions.BackgroundImageDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465494034" />
-    <state x="658" y="253" width="672" height="677" key="run.anything.popup" timestamp="1579773332248">
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup" timestamp="1579792159838">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="655" y="253" key="run.anything.popup/63.27.1857.1053@63.27.1857.1053" timestamp="1577992961372" />
-    <state x="658" y="253" width="672" height="677" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579773332248" />
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579792159838" />
     <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1579718342569">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -287,7 +305,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/../resources/views/layouts/app.blade.php</url>
-          <line>148</line>
+          <line>147</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
