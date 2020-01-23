@@ -22,9 +22,20 @@ class OrderController extends Controller
 
     public function index()
     {
-        $data = Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->get();
-        return $data;
-//        return view('pages.category.all_categories', compact("$data"));
+        $orders = Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->get();
+        $i=0;
+        foreach ($orders as $order) {
+            $total['qnt'] = 0;
+            $total['after_dis'] = 0;
+            foreach ($order->card as $card) {
+                $total['qnt'] += $card->quantity;
+                $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
+            }
+            $orders[$i]->qnt=$total['qnt'];
+            $orders[$i++]->total=$total['after_dis'];
+
+        }
+        return view('pages.user.order_history', compact("orders"));
     }
 
     /**
@@ -34,14 +45,14 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $order= Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
+        $order = Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
         $total['qnt'] = 0;
         $total['after_dis'] = 0;
         foreach ($order->card as $card) {
             $total['qnt'] += $card->quantity;
             $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
         }
-         return view('pages.user.checkout', [ 'total' => $total,'order' => $order]);
+        return view('pages.user.checkout', ['total' => $total, 'order' => $order]);
     }
 
     /**
@@ -52,9 +63,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-   return $request;
+        return $request;
 //        return redirect()->route('order.index');
-
     }
 
     /**
@@ -88,14 +98,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $attributes=request()->validate([
+        $attributes = request()->validate([
             'country' => ['required', 'min:3'],
             'state' => ['required', 'min:3'],
             'city' => ['required', 'min:3'],
             'address' => ['required', 'min:3'],
-            'phone' => ['required', 'numeric', 'integer'],
+            'phone' => ['required', 'numeric']
         ]);
-        $attributes['status']="waiting to confirm";
+        $attributes['status'] = "Order Processing";
+        $attributes['created_at'] = time();
         $order->update($attributes);
         return redirect()->route('order.index');
     }
@@ -108,7 +119,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        Order:destroy($id);
+        Order:
+        destroy($id);
         return redirect()->route('order.index');
     }
 }

@@ -23,7 +23,6 @@
 
         @if(empty($order->card))
             <div class="row ">
-
                 <h1 class="col text-center">Your Cart is Empty </h1>
             </div>
         @else
