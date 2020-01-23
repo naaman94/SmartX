@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div style="width:75%" class="container-fluid ">
         @if(session("message"))
             <div class="alert alert-success">

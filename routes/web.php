@@ -22,3 +22,4 @@ route::resource('news','NewsController');
 route::resource('card','CardController');
 //Route::group(['middleware'=>['auth','admin']],function (){
 // });
+Route::get('/admin/orders', 'OrderController@admin_index')->name('order.admin_index');

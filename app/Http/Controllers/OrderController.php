@@ -38,6 +38,23 @@ class OrderController extends Controller
         return view('pages.user.order_history', compact("orders"));
     }
 
+    public function admin_index()
+    {
+        $orders = Order::whereNotIn('status', ["cart"])->get();
+        $i=0;
+        foreach ($orders as $order) {
+            $total['qnt'] = 0;
+            $total['after_dis'] = 0;
+            foreach ($order->card as $card) {
+                $total['qnt'] += $card->quantity;
+                $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
+            }
+            $orders[$i]->qnt=$total['qnt'];
+            $orders[$i++]->total=$total['after_dis'];
+
+        }
+        return view('pages.order.admin_order', compact("orders"));
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resources/views/pages/order/admin_order.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/user/checkout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/orders.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/adminHome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/adminHome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +188,7 @@
       <workItem from="1579465477643" duration="25042000" />
       <workItem from="1579542018647" duration="65101000" />
       <workItem from="1579695294868" duration="14771000" />
-      <workItem from="1579762208173" duration="11124000" />
+      <workItem from="1579762208173" duration="12180000" />
     </task>
     <servers />
   </component>
@@ -296,7 +297,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php</url>
-          <line>25</line>
+          <line>22</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
