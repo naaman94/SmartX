@@ -18,8 +18,9 @@ Route::resources([
     'card' => 'CardController',
     'order' => 'OrderController'
 ]);
-Route::get('/', 'NewsController@index');
+Route::get('/', 'HomeController@welcome')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@admin_index')->name('admin.home');
 Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
 Route::get('/admin/order', 'OrderController@admin_index')->name('order.admin_index');
 Route::get('/myCart', 'CardController@index');

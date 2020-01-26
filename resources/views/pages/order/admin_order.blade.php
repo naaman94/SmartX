@@ -2,18 +2,22 @@
 @section('content')
     <script>
         function openAll() {
-            var el = document.getElementsByClassName('more_details');
-            for (var i = 0; i < el.length; i++) {
-                el[i].click();
+            var more_details = document.getElementsByClassName('more_details');
+            for (var i = 0; i < more_details.length; i++) {
+                more_details[i].click();
             }
         }
-
         function printDiv() {
             var originalContents = document.body.innerHTML;
             openAll();
             window.print();
             document.body.innerHTML = originalContents;
         }
+
+        function select_form(id) {
+            document.getElementById(`select_form_${id}`).submit();
+        }
+
     </script>
     <div style="width:75%" class="container-fluid ">
         @if(session("message"))
@@ -58,7 +62,7 @@
                     Status
                 </div>
                 <div class="col-2 font-weight-bold text-center">
-                    <a href="#"  onclick="openAll()"> See All Details</a>
+                    <a href="#" onclick="openAll()"> See All Details</a>
                 </div>
 
             </div>
@@ -79,11 +83,19 @@
                             {{substr($order->created_at,0,10)}}
                         </div>
                         <div class="col-3 font-weight-bold text-center">
-                            <select value="{{$order->status}}" class="custom-select">
-                                <option value="Order Processing">Order Processing</option>
-                                <option value="Order Shipping">Order Shipping</option>
-                                <option value="Order delivered">Order delivered</option>
-                            </select>
+                            <form id="select_form_{{$order->id}}" method="post"
+                                  action="{{route("order.update",$order)}}">
+                                @csrf
+                                @method('PUT')
+                                <select name="status" onchange="select_form({{$order->id}})" value="{{$order->status}}"
+                                        class="custom-select">
+                                    @foreach($status_form_array as $status)
+                                        <option
+                                            {{$status === $order->status ? "selected" : ""}} value="{{$status}}">{{$status}}</option>
+                                    @endforeach
+                                </select>
+                            </form>
+
                         </div>
                         <div class="col-2 font-weight-bold text-center">
                             <a data-toggle="collapse" href="#collapse_details{{$order->id}}"
@@ -97,15 +109,20 @@
                             <div class="collapse" id="collapse_details{{$order->id}}">
                                 <h5 class="border-success border-bottom pb-2 ">Order Details</h5>
                                 <div class="row pt-2 my-2">
-                                    <p class="col-6"><span class="font-weight-bold">User Name : </span>{{$order->user->name}}</p>
-                                    <p class="col-6"><span class="font-weight-bold">User Email : </span>{{$order->user->email}}</p>
-                                    <p class="col-6"><span class="font-weight-bold">User Phone : </span>{{$order->user->phone}}</p>
-                                    <p class="col-6"><span class="font-weight-bold">Country : </span>{{$order->country}}</p>
+                                    <p class="col-6"><span
+                                            class="font-weight-bold">User Name : </span>{{$order->user->name}}</p>
+                                    <p class="col-6"><span
+                                            class="font-weight-bold">User Email : </span>{{$order->user->email}}</p>
+                                    <p class="col-6"><span
+                                            class="font-weight-bold">User Phone : </span>{{$order->user->phone}}</p>
+                                    <p class="col-6"><span class="font-weight-bold">Country : </span>{{$order->country}}
+                                    </p>
                                     <p class="col-6"><span class="font-weight-bold">State : </span>{{$order->state}}</p>
                                     <p class="col-6"><span class="font-weight-bold">City : </span>{{$order->city}}</p>
                                     <p class="col-6"><span class="font-weight-bold">Address : </span>{{$order->address}}
                                     </p>
-                                    <p class="col-6"><span class="font-weight-bold"> Order Phone : </span>{{$order->phone}}</p>
+                                    <p class="col-6"><span
+                                            class="font-weight-bold"> Order Phone : </span>{{$order->phone}}</p>
                                 </div>
                                 <h5 class="border-bottom border-success pb-2 ">Order Items</h5>
 

@@ -62,9 +62,10 @@
             <div class="form-group row">
                 <label class="col-form-label" for="Category_name">Status</label>
                 <select value="{{ old('status',$item->status ) }}" name="status" class="custom-select" id="status">
-                    <option selected value="Available">Available</option>
-                    <option value="Coming Soon">Coming Soon</option>
-                    <option value="Out of Stock">Out of Stock</option>
+                    @foreach(array("Available","Coming Soon","Out of Stock") as $status)
+                        <option {{ old('status',$item->status ) == $status?"selected":""}}  value="{{$status}}" >{{$status}}</option>
+                    @endforeach
+
                 </select>
             </div>
 
@@ -74,7 +75,7 @@
                 <select name="category_id" class="custom-select" id="category_id"
                         value="{{ old('category_id',$item->category_id ) }}">
                     @foreach($categories as $category)
-                        <option value={{$category->id}}>{{$category->name}}</option>
+                        <option {{ old('category_id',$item->category_id ) == $category->id ? "selected":" "}} value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>

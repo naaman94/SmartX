@@ -15,6 +15,8 @@ class OrderController extends Controller
      *
      * @return Response
      */
+    public $status_form_array=['Order Processing','Order Shipping','Order delivered','We will contact with you soon','The order details has been sent to the e-mail','Order Reject'];
+
     public function __construct()
     {
         $this->middleware('admin')->only(['destroy', "admin_index"]);
@@ -29,8 +31,9 @@ class OrderController extends Controller
 
     public function admin_index()
     {
+
         $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart"])->get());
-        return view('pages.order.admin_order', compact("orders"));
+        return view('pages.order.admin_order', ['orders' => $orders,'status_form_array' => $this->status_form_array]);
     }
 
     /**
@@ -63,7 +66,7 @@ class OrderController extends Controller
         ]);
         $attributes['status'] = "Order Processing";
         $attributes['created_at'] = time();
-        $order->update($attributes);
+        $order->update($attributes);//we use update because it create in cardController
         return redirect()->route('order.index');
     }
 
@@ -84,9 +87,9 @@ class OrderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        return view('pages.orders.edit_order', ['data' => Order::findOrFail($id)]);
+//        return view('pages.orders.edit_order', ['data' => Order::findOrFail($id)]);
     }
 
     /**
@@ -100,7 +103,7 @@ class OrderController extends Controller
     {
 
         $attributes = request()->validate([
-            'status' => ['required', "in_array[]"],
+            'status' => ["in:".implode(',',$this->status_form_array)],
         ]);
         $order->update($attributes);
         return redirect()->route('order.admin_index');

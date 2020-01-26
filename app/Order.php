@@ -17,5 +17,4 @@ class Order extends Model
     public function card (){
     return $this->hasMany('App\Card'); // name of model
 }
-
 }
