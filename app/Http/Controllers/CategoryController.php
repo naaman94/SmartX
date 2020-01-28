@@ -12,8 +12,8 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->except(['show']);
-        $this->middleware('auth')->except(['show']);
+        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -23,8 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-//        $news = News::all()->take(10);//return the top news art
+        $categories = Category::orderBy('created_at', 'DESC')->paginate(20);
         return view('pages.category.all_categories', compact("categories"));
     }
 
@@ -48,29 +47,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-//        $this->validate(request(), [
-//            'name' => 'required|unique:games',
-//            'description' => 'required',
-//        ]);
         $attributes = request()->validate([
             'name' => ['required', 'unique:categories', 'min:3'],
-            'description' => ['required', 'min:3']
+            'description' => ['string', 'nullable']
+
         ]);
 
         Category::create($attributes);
         session()->flash("message", "{$request->name} category has been created.");
         return redirect()->route('category.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
     }
 
     /**
@@ -95,7 +80,8 @@ class CategoryController extends Controller
     {
         $attributes = request()->validate([
             'name' => ['required', Rule::unique('categories')->ignore($category->id), 'min:3'],
-            'description' => ['required', 'min:3']
+            'description' => ['string', 'nullable']
+
         ]);
         $category->update($attributes);
         session()->flash("message", "{$request->name} category has been successfully Edit.");
@@ -108,6 +94,7 @@ class CategoryController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {

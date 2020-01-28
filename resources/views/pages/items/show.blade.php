@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="card mt-4">
-                    <img class="card-img-top img-fluid" src="/storage/items_img/{{$item->image}}" alt="">
+                    <img class="card-img-top img-fluid" src="/storage/storage/items/{{$item->image}}" alt="">
                     <div class="card-body">
                         <h3 class="card-title">{{$item->name}}</h3>
                         <h6>Category : {{$item->category->name}}</h6>
@@ -44,7 +44,10 @@
                             <small class="col">{{$item->status}}</small>
                             <small class="col mr-2 text-right"> SKU : {{$item->sku}}</small>
                         </div>
+                        <small>{{$item->short_description}}</small>
+
                         <hr>
+
                         <br>
                         <h4>Description :</h4>
 
@@ -87,7 +90,7 @@
                             </button>
                         </form>
                         @else
-                        <a class="btn btn-primary btn-lg btn-block mt-2" href="{{ route('card.index') }}">
+                        <a class="btn btn-primary btn-lg btn-block mt-2" href="{{ route('mycart') }}">
                             <i class="fas fa-shopping-cart"></i> View Cart</a>
                     @endif
                 @else

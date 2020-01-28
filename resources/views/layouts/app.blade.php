@@ -115,9 +115,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/Admin') }}">
-                                        <i class="fas fa-crown"></i> Admin Dashboard
-                                    </a>
+{{--                                    <a class="dropdown-item" href="{{ url('/Admin') }}">--}}
+{{--                                        <i class="fas fa-crown"></i> Admin Dashboard--}}
+{{--                                    </a>--}}
                                     <a class="dropdown-item" href="/category">
                                         <i class="fas fa-list-ul"></i> Categories
                                     </a>
@@ -135,7 +135,7 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('card.index') }}">
+                            <a class="nav-link js-scroll-trigger" href="{{ route('mycart') }}">
                                 <i class="fas fa-shopping-cart"></i> My Cart</a>
                         </li>
                         <li class="nav-item dropdown">

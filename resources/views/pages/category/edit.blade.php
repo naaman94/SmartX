@@ -2,12 +2,14 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-lg-5">
+        <div class="row ">
+            <h1 class="text-danger">Edit Categoy</h1>
+        </div>
 
         <form method="post" action="{{route('category.update',['id' => $category->id])}}">
             @method('PUT')
             @csrf
-            <h1 class="text-primary">Edit Categoy</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

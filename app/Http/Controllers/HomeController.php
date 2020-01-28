@@ -15,7 +15,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('admin')->only("admin_index");
-
         $this->middleware('auth')->except("welcome");
     }
 
@@ -27,16 +26,13 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->isAdmin()){
-            return redirect(route("admin.home"));
+            return redirect(route("order.admin_index"));
         } ;
-        return view('home');
+        return redirect(route("item.index"));
     }
     public function welcome()
 {
     return view('welcome');
 }
-    public function admin_index()
-    {
-        return view('adminHome');
-    }
+
 }

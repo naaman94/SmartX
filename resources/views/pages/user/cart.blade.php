@@ -8,10 +8,19 @@
                 <p class="text-monospace text-center">{{session("message")}}</p>
             </div>
         @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h1 class="mt-4 mb-3"><i class="fas fa-shopping-cart"></i> My Cart
         </h1>
         <div class="row">
-            @if(empty($cards->toArray()))
+            @if($cards->count()==0)
                 <h1 class="col text-center">Your Cart is Empty </h1>
             @else
                 <div class="col-xl-9">
@@ -22,7 +31,7 @@
                                     <div class="col-lg-2">
                                         <a href="/item/{{$card->item_id}}">
                                             <img class="img-fluid rounded"
-                                                 src="/storage/items_img/{{$card->item->image}}"
+                                                 src="/storage/storage/items/{{$card->item->image}}"
                                                  alt=""
                                                  height="300" width="400">
                                         </a>
@@ -86,13 +95,20 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="row ">
+                        <div class="col">
+                            {{$cards->links()}}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-xl-3">
 
                     <!-- Search Widget -->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <a href="{{route('order.create')}}" class="btn btn-primary btn-lg btn-block">Go to checkout</a>
+                            <a href="{{route('order.create')}}" class="btn btn-primary btn-lg btn-block">Go to
+                                checkout</a>
                             <div class="mt-3">
                                 <div class="row">
                                     <h5 class="col align-self-start">Items({{$total['qnt']}})</h5>

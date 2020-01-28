@@ -17,15 +17,9 @@ class CardController extends Controller
 
     public function index()
     {
-        $user=Auth::user();
-        $cards = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
-            ['country' => $user->country,
-                'city' => $user->city,
-                'state' => $user->state,
-                'address' => $user->address,
-                'phone' => $user->phone,
-            ])
-            ->card;
+        $user = Auth::user();
+        $order = $this->order($user);
+        $cards = Card::whereOrder_id($order->id)->orderBy('created_at', 'DESC')->paginate(15);
         $total['qnt'] = 0;
         $total['price'] = 0;
         $total['after_dis'] = 0;
@@ -35,32 +29,26 @@ class CardController extends Controller
             $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
         }
         $total['discount'] = $total['price'] - $total['after_dis'];
-        return view('pages.user.cart', ['total' => $total, 'cards' => $cards]);
+        return view('pages.user.cart', ['total' => $total, 'cards' => $cards, 'order' => $order]);
     }
 
     public function store(Request $request)
-
     {
         $attributes = request()->validate([
             'item_id' => ['required', 'exists:items,id'],
             'quantity' => ['required', 'numeric', 'between:0,100'],
         ]);
         $user = Auth::user();
-        $order = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
-            ['country' => $user->country,
-                'city' => $user->city,
-                'state' => $user->state,
-                'address' => $user->address,
-                'phone' => $user->phone,
-            ]);
+        $order = $this->order($user);
         $attributes['order_id'] = $order->id;
-        $card=Card::whereOrder_id($order->id)->whereItem_id($attributes['item_id'])->first();
+        $card = Card::whereOrder_id($order->id)->whereItem_id($attributes['item_id'])->first();
         if ($card) {
-            $card->update(['quantity' => $attributes['quantity']+$card->quantity]);
+            $card->update(['quantity' => $attributes['quantity'] + $card->quantity]);
         } else {
             Card::create($attributes);
         }
-        return redirect()->route('card.index');
+        session()->flash("message", "Item has been Added to the cart.");
+        return redirect()->route('mycart');
     }
 
     public function update(Request $request, Card $card)
@@ -70,16 +58,31 @@ class CardController extends Controller
         ]);
         if ($attributes['quantity'] == 0) {
             $card->delete();
+            session()->flash("message", " item has been deleted from the cart.");
 
         }
         $card->update(['quantity' => $attributes['quantity']]);
-        return redirect()->route('card.index');
+        return redirect()->route('mycart');
     }
 
     public function destroy(Card $card)
     {
         $card->delete();
-        return redirect()->route('card.index');
+        session()->flash("message", " item has been deleted from the cart.");
+        return redirect()->route('mycart');
+    }
+
+
+    protected function order(?\Illuminate\Contracts\Auth\Authenticatable $user)
+    {
+        $order = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
+            ['country' => $user->country,
+                'city' => $user->city,
+                'state' => $user->state,
+                'address' => $user->address,
+                'phone' => $user->phone,
+            ]);
+        return $order;
     }
 
 }

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <a href="/item/{{$item->id}}">
-                                <img class="img-fluid rounded" src="/storage/items_img/{{$item->image}}" alt=""
+                                <img class="img-fluid rounded" src="/storage/storage/items/{{$item->image}}" alt=""
                                      height="300" width="400">
                             </a>
                         </div>

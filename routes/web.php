@@ -10,24 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);//by email
 Route::resources([
-    'category' => 'CategoryController',
     'item' => 'ItemController',
-    'news' => 'NewsController',
-    'card' => 'CardController',
-    'order' => 'OrderController'
+    'news' => 'NewsController'
 ]);
+Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
+
+
 Route::get('/', 'HomeController@welcome')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', 'HomeController@admin_index')->name('admin.home');
-Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
+
+
+Route::resource('category', 'CategoryController')->except(['show']);
+
+Route::resource('card', 'CardController')->except(['index','show', 'create', 'edit']);
+Route::get('/myCart', 'CardController@index')->name('mycart');
+
+Route::resource('order', 'OrderController')->except(['show','edit', 'destroy']);
 Route::get('/admin/order', 'OrderController@admin_index')->name('order.admin_index');
-Route::get('/myCart', 'CardController@index');
 
 
-
-//Route::get('/order', 'OrderController@index')->name('order.index');
-//Route::post('/order', 'OrderController@store')->name('order.store');
-//Route::DELETE('/order/{order}', 'OrderController@destroy')->name('order.destroy');
-//Route::get('/order/{order}/edit', 'OrderController@edit')->name('order.edit');
+//  index', 'show', 'edit', 'create', 'store', 'update', 'destroy'

@@ -29,14 +29,14 @@
 
             <div class="row ">
                 <div class="col-lg-7">
-                    @foreach($order->card  as $card)
+                    @foreach($cards  as $card)
                         <div class="card mb-1">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-1">
                                         <a href="/item/{{$card->item_id}}">
                                             <img class="img-fluid rounded"
-                                                 src="/storage/items_img/{{$card->item->image}}"
+                                                 src="/storage/storage/itemsf/{{$card->item->image}}"
                                                  alt=""
                                                  height="225" width="300">
                                         </a>
@@ -64,6 +64,11 @@
                             </div>
                         </div>
                     @endforeach
+                        <div class="row ">
+                            <div class="col">
+                                {{$cards->links()}}
+                            </div>
+                        </div>
                     <hr>
                     <div class="row ">
                         <h3 class="col text-right">Total ({{$total['qnt']}} Items) : {{$total['after_dis']}} JD</h3>

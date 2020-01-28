@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('country');
-            $table->string('city');
             $table->string('state');
-            $table->string('address');
+            $table->string('city');
+            $table->string('address')->nullable();
             $table->string('image')->default("no_img_user.jpg");
             $table->rememberToken();
             $table->timestamps();

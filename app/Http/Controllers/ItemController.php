@@ -6,71 +6,56 @@ use App\Card;
 use App\Category;
 use App\Item;
 use App\Order;
-use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Image;
 
 class ItemController extends Controller
 {
+    public $categories;
+
     public function __construct()
     {
+        $this->categories= Category::orderBy('name', 'ASC')->get();
         $this->middleware('admin')->except(['index', 'show']);
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categories;
         if (request("category") && request("category") != "all_item") {
-            $items = Category::findOrFail(request("category"))->item;
+            $items=Item::orderBy('name', 'ASC')->whereCategory_id(request("category"))->paginate(21);
         } else {
-            $items = Item::all();
+            $items = Item::orderBy('name', 'ASC')->paginate(21);
         }
-
         return view('pages.items.index', compact(["categories", "items"]));
     }
-
     public function admin_index()
     {
-        $categories = Category::all();
-        $items = Item::all();
+        $categories = $this->categories;
+        $items = Item::orderBy('name', 'ASC')->paginate(15);;
         return view('pages.items.admin_index', compact(["categories", "items"]));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        return view('pages.items.create', ['categories' => Category::all()]);
-
+        return view('pages.items.create', ['categories' =>$this->categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $attributes = $this->ValidateItem();
-        $attributes['views'] = 0;
         $attributes['image'] = "no_img_item.jpg";
-        if ($request->hasfile('image')) {
-            $image = $request->file('image');
-            $attributes['image'] = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/storage/items_img/' . $attributes['image']));
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $ext = $image->getClientOriginalExtension();
+            $attributes['image'] = uniqid() . '.' . $ext;
+            $image->storeAs('public/storage/items', $attributes['image']);
         }
         Item::create($attributes);
         session()->flash("message", "{$request->name} item has been created.");
@@ -78,15 +63,10 @@ class ItemController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Item $item)
     {
-        $categories = Category::all();
+        $categories = $this->categories;
         $user = Auth::user();
         if ($user) {
             $order = Order::firstOrCreate(['user_id' => $user->id, 'status' => 'cart'],
@@ -98,53 +78,35 @@ class ItemController extends Controller
                 ]);
             $is_in_cart = Card::whereOrder_id($order->id)->whereItem_id($item->id)->first();
         } else {
-            $is_in_cart = 1;
+            $is_in_cart = null;
         }
         return view('pages.items.show', compact(["categories", "item", "is_in_cart"]));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
+
     public function edit(Item $item)
     {
         $this->authorize('update', $item);
-        $categories = Category::all();
+        $categories = $this->categories;
         return view('pages.items.edit', compact(["categories", "item"]));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param Item $item
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
+
     public function update(Request $request, Item $item)
     {
         $this->authorize('update', $item);
-
         $attributes = $this->ValidateItem($item->id);
-        $attributes['views'] = 0;
-        if ($request->image == null) {
-            $attributes['image'] = $request->org_image;
-        } else {
-//            $file_path = app_path("public/storage/items_img/{$request->org_image}");
-//            if(File::exists($file_path)) dd(File::delete($file_path));
-//should delete
-            $attributes['image'] = $request->file('image')->getClientOriginalName();
-            if ($attributes['image'] != "no_img_item.jpg" && $attributes['image'] != $item->image) {//ok here chech the get function
-                //delete the old image
-                $image = $request->file('image');
-                $attributes['image'] = time() . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->save(public_path('/storage/items_img/' . $attributes['image']));
-            }
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $ext = $image->getClientOriginalExtension();
+            $attributes['image'] = uniqid() . '.' . $ext;
+            //upload the image
+            $image->storeAs('public/storage/items', $attributes['image']);
+            //delete the previous image.
+            Storage::delete("public/storage/items/$request->org_image");
+            //this column has a default value so don't need to set it empty.
         }
+
         $item->update($attributes);
         session()->flash("message", "{$request->name} item has been successfully Edit.");
         return redirect()->route('item.show', ['id' => $item->id]);
@@ -155,32 +117,30 @@ class ItemController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function destroy(Item $item)
     {
         $this->authorize('delete', $item);
-
         $item->delete();
         session()->flash("message", "Item has been Successfully Deleted.");
         return redirect()->route('item.admin_index');
 
-//        return redirect('News')->with('success', 'Data is successfully deleted');
     }
 
-    /**
-     * @return mixed
-     */
+
     public function ValidateItem($id = 0)
     {
         return request()->validate([
             'sku' => ['required', Rule::unique('items')->ignore($id), 'min:3'],
             'name' => ['required', 'min:3'],
-            'description' => ['required', 'min:3'],
+            'description' => ['nullable', 'string'],
+            'short_description' => ['nullable', 'max:40'],
+            'image' => 'nullable|image|max:5000',
             'price' => ['required', 'numeric', 'integer'],
             'discount' => ['nullable', 'numeric', 'between:0,100'],
-            'status' => ['required', 'string'],
-            'category_id' => ['required'],
+            'status' => ['required', 'string','in:Available,Coming Soon,Out of Stock'],
+            'category_id' => ['required',"exists:categories,id"]
         ]);
     }
 }

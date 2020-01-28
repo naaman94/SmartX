@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = [
-        'sku','name', 'description','image','price','discount','views','status','category_id'
-    ];
+    protected $guarded = [];
 
 
     public function card (){

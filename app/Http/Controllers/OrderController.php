@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,25 +16,24 @@ class OrderController extends Controller
      *
      * @return Response
      */
-    public $status_form_array=['Order Processing','Order Shipping','Order delivered','We will contact with you soon','The order details has been sent to the e-mail','Order Reject'];
+    public $status_form_array = ['Order Processing', 'Order Shipping', 'Order Delivered', 'Order Reject', 'We will contact with you soon', 'The order details has been sent to the e-mail'];
 
     public function __construct()
     {
-        $this->middleware('admin')->only(['destroy', "admin_index"]);
+        $this->middleware('admin')->only(['update', "admin_index"]);
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $orders = $this->Total_price_Orders(Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->get());
+        $orders = $this->Total_price_Orders(Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->orderBy('created_at', 'DESC')->paginate(20));
         return view('pages.user.order_history', compact("orders"));
     }
 
     public function admin_index()
     {
-
-        $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart"])->get());
-        return view('pages.order.admin_order', ['orders' => $orders,'status_form_array' => $this->status_form_array]);
+        $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart"])->orderBy('created_at', 'DESC')->paginate(20));
+        return view('pages.order.admin_order', ['orders' => $orders, 'status_form_array' => $this->status_form_array]);
     }
 
     /**
@@ -44,8 +44,9 @@ class OrderController extends Controller
     public function create()
     {
         $order = Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
-        $total = $this->total_price_cards($order->card);
-        return view('pages.user.checkout', ['total' => $total, 'order' => $order]);
+        $cards = Card::whereOrder_id($order->id)->paginate(20);
+        $total = $this->Total_price_in_cards($order->card);
+        return view('pages.user.checkout', ['total' => $total, 'cards' => $cards, 'order' => $order]);
     }
 
     /**
@@ -57,39 +58,20 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
+
         $attributes = request()->validate([
-            'country' => ['required', 'min:3'],
-            'state' => ['required', 'min:3'],
-            'city' => ['required', 'min:3'],
-            'address' => ['required', 'min:3'],
-            'phone' => ['required', 'numeric']
+            'phone' => ['required', 'regex:/^[0-9+]*$/', 'max:15'],
+            'country' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'address' => ['nullable', 'string'],
         ]);
         $attributes['status'] = "Order Processing";
         $attributes['created_at'] = time();
         $order->update($attributes);//we use update because it create in cardController
+        session()->flash("message", " Order has been confirmed.");
+
         return redirect()->route('order.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('pages.orders.show_order', ['data' => Order::findOrFail($id)]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit(Order $order)
-    {
-//        return view('pages.orders.edit_order', ['data' => Order::findOrFail($id)]);
     }
 
     /**
@@ -101,25 +83,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-
+//update status only
         $attributes = request()->validate([
-            'status' => ["in:".implode(',',$this->status_form_array)],
+            'status' => ["in:" . implode(',', $this->status_form_array)],
         ]);
+        $old_status = $order->status;
         $order->update($attributes);
+        session()->flash("message", " order {$order->id} status has been update  from {$old_status} to {$attributes['status']} .");
         return redirect()->route('order.admin_index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        Order:
-        destroy($id);
-        return redirect()->route('order.index');
     }
 
     /**
@@ -130,7 +101,7 @@ class OrderController extends Controller
     {
         $i = 0;
         foreach ($orders as $order) {
-            $total = $this->total_price_cards($order->card);
+            $total = $this->Total_price_in_cards($order->card);
             $orders[$i]->qnt = $total['qnt'];
             $orders[$i++]->total = $total['after_dis'];
         }
@@ -141,7 +112,7 @@ class OrderController extends Controller
      * @param $cards
      * @return mixed
      */
-    protected function Total_price_cards($cards)
+    protected function Total_price_in_cards($cards)
     {
         $total['qnt'] = 0;
         $total['after_dis'] = 0;

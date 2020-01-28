@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div style="width:75%" class="container-fluid ">
+    <div style="width:75%" class="container ">
         @if(session("message"))
             <div class="alert alert-success">
                 <p class="text-monospace text-center">{{session("message")}}</p>
@@ -84,7 +84,7 @@
                                         <div class="col-md-1">
                                             <a href="/item/{{$card->item_id}}">
                                                 <img class="img-fluid rounded"
-                                                     src="/storage/items_img/{{$card->item->image}}"
+                                                     src="/storage/storage/items/{{$card->item->image}}"
                                                      alt=""
                                                      height="225" width="300">
                                             </a>
@@ -111,10 +111,16 @@
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                     </div>
                 </div>
             @endforeach
+            <div class="row ">
+                <div class="col">
+                    {{$orders->links()}}
+                </div>
+            </div>
         </div>
     </div>
 @endsection
