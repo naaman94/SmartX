@@ -22,7 +22,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::paginate(20);
+        $ads = Ad::paginate(10);
         return view('pages.ad.index', compact("ads"));
     }
 
@@ -33,7 +33,8 @@ class AdController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('pages.ad.create');
     }
 
     /**
@@ -44,7 +45,25 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $attributes = request()->validate([
+            'title' => ['required', "string", 'min:3'],
+            'url' => ['string', 'nullable'],
+            'image' => 'required|image|max:5000',
+        ]);
+        $attributes['show_in_home'] = array_key_exists('home', $request->show_in);
+        $attributes['show_in_store'] = array_key_exists('store', $request->show_in);
+        $attributes['show_in_items'] = array_key_exists('items', $request->show_in);
+
+        $image = $request->image;
+        $ext = $image->getClientOriginalExtension();
+        $attributes['image'] = uniqid() . '.' . $ext;
+        $image->storeAs('public/storage/ads',$attributes['image']);
+
+        Ad::create($attributes);
+        session()->flash("message", "{$request->title} has been created as Ad.");
+        return redirect()->route('ads.index');
+
     }
 
     /**
@@ -66,7 +85,9 @@ class AdController extends Controller
      */
     public function edit(Ad $ad)
     {
-        //
+        
+        return view('pages.ad.edit',['ad'=>$ad]);
+
     }
 
     /**
@@ -89,6 +110,9 @@ class AdController extends Controller
      */
     public function destroy(Ad $ad)
     {
-        //
+
+        $ad->delete();
+        session()->flash("message", "ad has been Deleted.");
+        return redirect()->route('ads.index');
     }
 }

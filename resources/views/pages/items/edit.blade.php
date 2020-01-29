@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-5">
 
         <form method="post" enctype="multipart/form-data" action="{{route('item.update',['id' => $item->id])}}">
             @method('PUT')

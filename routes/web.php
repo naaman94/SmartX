@@ -9,6 +9,7 @@ Route::post('/EditProfile','Auth\EditProfileController@update')->name('editProfi
 
 
 Route::resources([
+    'ads' => 'AdController',
     'item' => 'ItemController',
     'news' => 'NewsController'
 ]);

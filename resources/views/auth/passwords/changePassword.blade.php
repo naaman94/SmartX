@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-5">
         @if(session("message"))
             <div class="alert alert-success">
                 <p class="text-monospace text-center">{{session("message")}}</p>

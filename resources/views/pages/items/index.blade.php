@@ -3,7 +3,7 @@
     <link href="{{ asset('css/NavBar.css') }}" rel="stylesheet">
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-lg-3">
                 <h1>Categories</h1>

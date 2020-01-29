@@ -1,21 +1,21 @@
 @extends('layouts.app')
 @section('content')
-    @if(session("message"))
-        <div class="alert alert-success">
-            <p class="text-monospace text-center">{{session("message")}}</p>
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="text-center">{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div style="width:75%" class="container ">
 
+    <div style="width:75%" class="container mt-5">
+        @if(session("message"))
+            <div class="alert alert-success">
+                <p class="text-monospace text-center">{{session("message")}}</p>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-center">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <h1 class="mt-4 mb-3"><i class="fas fa-cash-register"></i> My Order
         </h1>

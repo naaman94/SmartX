@@ -75,12 +75,9 @@ class RegisterController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();
-            $attributes['image'] = uniqid() . '.' . $ext;
-            //upload the image
+            $filename = uniqid() . '.' . $ext;
             $image->storeAs('public/storage/users', $filename);
-            //delete the previous image.
-//            Storage::delete("public/storage/users/{$user->image}");
-            //this column has a default value so don't need to set it empty.
+
         }
 
         return User::create([

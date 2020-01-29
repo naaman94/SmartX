@@ -20,7 +20,7 @@
         }
 
     </script>
-    <div style="width:75%" class="container-fluid ">
+    <div style="width:75%" class="container-fluid mt-5">
         @if(session("message"))
             <div class="alert alert-success">
                 <p class="text-monospace text-center">{{session("message")}}</p>

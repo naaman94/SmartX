@@ -2,31 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a920b8c6-93b9-4375-829c-9516ffb10912" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/Http/Controllers/Auth/ChanePasswordController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/Http/Controllers/Auth/EditProfileController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../resources/views/auth/EditProfile.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../resources/views/auth/passwords/changePassword.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../resources/views/pages/order/order_history.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/AdController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/AdController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/CardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/CardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/adminHome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/auth/EditProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/EditProfile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/auth/passwords/changePassword.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/passwords/changePassword.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/passwords/email.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/passwords/reset.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/auth/verify.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/ad/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/ad/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/ad/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/ad/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/ad/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/ad/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/admin_index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/items/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../resources/views/pages/order/admin_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/admin_order.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/checkout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/views/pages/user/order_history.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/order/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/order/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/checkout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/pages/order/order_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/pages/order/order_history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -225,6 +227,7 @@
       <workItem from="1580191730490" duration="20047000" />
       <workItem from="1580217327772" duration="5809000" />
       <workItem from="1580278181129" duration="16587000" />
+      <workItem from="1580301433479" duration="6727000" />
     </task>
     <servers />
   </component>
@@ -298,11 +301,11 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="579" height="446" key="SwitcherDM/67.27.1853.1053@67.27.1853.1053" timestamp="1579681641332" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1580278232046">
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1580301444835">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="647" y="380" key="com.intellij.ide.util.TipDialog/63.27.1857.1053@63.27.1857.1053" timestamp="1578672170078" />
-    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1580278232046" />
+    <state x="650" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1580301444835" />
     <state x="561" y="162" width="944" height="789" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580021856450">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -320,15 +323,15 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="737" y="425" width="714" height="301" key="org.intellij.images.editor.actions.BackgroundImageDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579465494034" />
-    <state x="658" y="253" width="672" height="677" key="run.anything.popup" timestamp="1580215572714">
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup" timestamp="1580303922151">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="655" y="253" key="run.anything.popup/63.27.1857.1053@63.27.1857.1053" timestamp="1577992961372" />
-    <state x="658" y="253" width="672" height="677" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1580215572714" />
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1580219611846">
+    <state x="658" y="253" width="672" height="677" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1580303922151" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1580307734335">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1580219611846" />
+    <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1580307734335" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -340,7 +343,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/../resources/views/layouts/app.blade.php</url>
-          <line>147</line>
+          <line>99</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

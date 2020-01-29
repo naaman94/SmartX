@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('admin')->only("admin_index");
-        $this->middleware('auth')->except("welcome");
+        $this->middleware('auth')->except("home");
     }
 
     /**
