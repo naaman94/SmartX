@@ -58,7 +58,7 @@
                                     @if($item->discount==0)
                                         <h5>{{$item->price}} JD</h5>
                                         @if($item->short_description!=null)
-                                            <small>{{$item->short_description}}</small>
+                                            <small class="text-success">{{$item->short_description}}</small>
                                         @endif
                                     @else
                                         <h5 style="text-decoration: line-through">{{$item->price}}
@@ -66,9 +66,9 @@
                                         <h5 style=" color: red">{{$item->price-$item->price*$item->discount/100}}
                                             JD</h5>
                                         @if($item->short_description!=null)
-                                            <small>{{$item->short_description}}</small>
+                                            <small class="text-success">{{$item->short_description}}</small>
                                         @else
-                                            <small>You save {{$item->discount}} %</small>
+                                            <small class="text-danger">You save {{$item->discount}} %</small>
                                         @endif
 
                                     @endif

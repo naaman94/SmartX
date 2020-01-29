@@ -13,7 +13,7 @@
             @csrf
 
             <div class="form-group">
-                <h1 class="text-primary">Edit Items</h1>
+                <h1 class="text-primary mt-4">Edit Items</h1>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -108,8 +108,12 @@
                     image.src = URL.createObjectURL(event.target.files[0]);
                 };
             </script>
-            <img id="output" width="200" src="/storage/storage/items/{{$item->image}}"/>
             <button type="submit" class="btn btn-success float-right"><i class="fas fa-plus"></i> Edit Item</button>
+
+            <div class="row justify-content-center">
+                <img class="col-lg-6 mt-2 " id="output" width="200" src="/storage/storage/items/{{$item->image}}"/>
+
+            </div>
         </form>
 
     </div>

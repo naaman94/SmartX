@@ -27,7 +27,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->Total_price_Orders(Order::whereUser_id(Auth::id())->whereNotIn('status', ["cart"])->orderBy('created_at', 'DESC')->paginate(20));
-        return view('pages.user.order_history', compact("orders"));
+        return view('pages.order.order_history', compact("orders"));
     }
 
     public function admin_index()
@@ -46,7 +46,7 @@ class OrderController extends Controller
         $order = Order::whereUser_id(Auth::id())->whereStatus('cart')->first();
         $cards = Card::whereOrder_id($order->id)->paginate(20);
         $total = $this->Total_price_in_cards($order->card);
-        return view('pages.user.checkout', ['total' => $total, 'cards' => $cards, 'order' => $order]);
+        return view('pages.order.checkout', ['total' => $total, 'cards' => $cards, 'order' => $order]);
     }
 
     /**

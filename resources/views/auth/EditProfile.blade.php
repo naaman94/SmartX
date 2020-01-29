@@ -2,15 +2,28 @@
 
 @section('content')
     <div class="container">
-
+        @if(session("message"))
+            <div class="alert alert-success">
+                <p class="text-monospace text-center">{{session("message")}}</p>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header text-white bg-success">
-                        <h4 class="text-center mt-2">{{ __('Register') }}</h4></div>
+                <div class="card ">
+                    <div class="card-header text-white bg-secondary">
+                        <h4 class="text-center mt-2">{{ __('My Profile') }}</h4></div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('editProfile') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -19,7 +32,8 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                           value="{{ old('name ',$user->name) }}" required autocomplete="name"
+                                           autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +50,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ old('email') }}" required autocomplete="email">
+                                           value="{{ old('email',$user->email) }}" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -47,40 +61,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                           class="form-control @error('password') is-invalid @enderror" name="password"
-                                           required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                           name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="phone"
                                        class="col-md-4 col-form-label text-md-right">{{ __('phone') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                           value="{{ old('phone') }}" required autocomplete="phone">
+                                           value="{{ old('phone',$user->phone) }}" required autocomplete="phone">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -112,18 +99,10 @@
                                 <div class="col-md-6">
                                     <select name="state" class="custom-select @error('state') is-invalid @enderror"
                                             id="state">
-                                        <option selected value="Amman">Amman</option>
-                                        <option value="Ajlun">Ajlun</option>
-                                        <option value="Al Aqabah">Al Aqabah</option>
-                                        <option value="Al Balqa'">Al Balqa'</option>
-                                        <option value="Al Karak">Al Karak</option>
-                                        <option value="Al Mafraq">Al Mafraq</option>
-                                        <option value="At Tafilah">At Tafilah</option>
-                                        <option value="Az Zarqa'">Az Zarqa'</option>
-                                        <option value="Irbid">Irbid</option>
-                                        <option value="Jarash">Jarash</option>
-                                        <option value="Ma'an">Ma'an</option>
-                                        <option value="Madaba">Madaba</option>
+                                        @foreach($states as$state)
+                                            <option
+                                                {{ old('state',$user->state ) == $state ? "selected":" "}} value="{{$state}}">{{$state}}</option>
+                                        @endforeach
                                     </select>
                                     @error('state')
                                     <span class="invalid-feedback" role="alert">
@@ -140,7 +119,7 @@
                                 <div class="col-md-6">
                                     <input id="city" type="text"
                                            class="form-control @error('city') is-invalid @enderror" name="city"
-                                           value="{{ old('city') }}" required autocomplete="city">
+                                           value="{{ old('city',$user->city) }}" required autocomplete="city">
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -156,7 +135,7 @@
                                 <div class="col-md-6">
                                     <input id="address" type="text"
                                            class="form-control @error('address') is-invalid @enderror" name="address"
-                                           value="{{ old('address') }}" autocomplete="address">
+                                           value="{{ old('address',$user->address) }}" autocomplete="address">
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -170,11 +149,16 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
                                 <div class="col-md-6">
                                     <div class="custom-file">
+                                        <input type="hidden" value="{{ old('image',$user->image ) }}" name="org_image">
+
                                         <input type="file" accept="image/*" name="image" onchange="loadFile(event)"
-                                               value="{{ old('image') }}" multiple
-                                               class="custom-file-input {{ $errors->has('image') ? 'is-invalid' : '' }}"
+                                               value="{{ old('image',$user->image) }}"
+                                               class="custom-file-input @error('image') is-invalid @enderror"
                                                id="image">
-                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        <label class="custom-file-label @error('image') is-invalid @enderror"
+                                               for="inputGroupFile01">Choose
+                                            file</label>
+
                                         @error('image')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong></span>
@@ -182,23 +166,22 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <script>
+                                var loadFile = function (event) {
+                                    var image = document.getElementById('output');
+                                    image.src = URL.createObjectURL(event.target.files[0]);
+                                };
+                            </script>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-success float-right    ">
-                                        {{ __('Register') }}
+                                    <button type="submit" class="btn btn-primary float-right">
+                                        {{ __('Update') }}
                                     </button>
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <img class="col-lg-6 mt-2 " id="output" width="200"/>
-                                <script>
-                                    var loadFile = function (event) {
-                                        var image = document.getElementById('output');
-                                        image.src = URL.createObjectURL(event.target.files[0]);
-                                    }
-                                </script>
+                                <img class="col-lg-6 mt-2 " id="output" width="200" src="/storage/storage/users/{{$user->image}}"/>
+
                             </div>
 
 

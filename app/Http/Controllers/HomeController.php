@@ -30,9 +30,9 @@ class HomeController extends Controller
         } ;
         return redirect(route("item.index"));
     }
-    public function welcome()
+    public function home()
 {
-    return view('welcome');
+    return view('home');
 }
 
 }

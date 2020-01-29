@@ -115,9 +115,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-{{--                                    <a class="dropdown-item" href="{{ url('/Admin') }}">--}}
-{{--                                        <i class="fas fa-crown"></i> Admin Dashboard--}}
-{{--                                    </a>--}}
+                                    {{--                                    <a class="dropdown-item" href="{{ url('/Admin') }}">--}}
+                                    {{--                                        <i class="fas fa-crown"></i> Admin Dashboard--}}
+                                    {{--                                    </a>--}}
                                     <a class="dropdown-item" href="/category">
                                         <i class="fas fa-list-ul"></i> Categories
                                     </a>
@@ -148,6 +148,12 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('order.index') }}">
                                     <i class="fas fa-boxes"></i> My Orders
+                                </a>
+                                <a class="dropdown-item" href="{{ route('changePassword') }}">
+                                    <i class="fas fa-key"></i> Change Password
+                                </a>
+                                <a class="dropdown-item" href="{{ route('editProfile') }}">
+                                    <i class="fas fa-user-edit"></i> Edit Profile
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

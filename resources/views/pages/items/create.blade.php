@@ -11,7 +11,7 @@
         <form method="post" action="{{route('item.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <h1 class="text-primary">Add Items</h1>
+                <h1 class="text-primary mt-4">Add Items</h1>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">

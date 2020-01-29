@@ -42,7 +42,12 @@
                                                href="/item/{{$card->item->id}}">{{$card->item->name}}</a>
                                         </h5>
                                         <small>SKU : <span style="color:blue"> {{$card->item->sku}}</span></small>
-
+                                        @if($card->item->short_description)
+                                            <small class="d-block mt-2 text-success">{{$card->item->short_description}}</small>
+                                        @elseif($card->item->discount!=0)
+                                            <small class="d-block mt-2 text-danger">You
+                                                save {{intval($card->item->discount)}} % </small>
+                                        @endif
                                     </div>
                                     <div class="col-lg-3">
                                         <form class="row justify-content-center" id="edit_form{{$card->id}}"
@@ -66,21 +71,25 @@
                                     </div>
                                     <div class="col-lg-2">
                                         @if($card->item->discount==0)
-                                            <h5 id="price" class="col text-center"
-                                                style="display: inline ">{{$card->item->price*$card->quantity}} JOD</h5>
+                                            <div class="col">
+                                            <h5 id="price" class="text-center font-weight-bold "
+                                                >{{$card->item->price*$card->quantity}} JOD</h5>
+                                            </div>
                                         @else
                                             <div class="col">
-                                                <h4 id="price" class="text-center font-weight-bold">
+                                                <h5 id="price" class="text-center font-weight-bold">
                                                     {{($card->item->price-$card->item->price*$card->item->discount/100)*$card->quantity}}
-                                                    JD</h4>
+                                                    JD</h5>
                                                 <h6 class="text-center"
                                                     style="text-decoration:line-through">{{$card->item->price*$card->quantity}}
                                                     JD</h6>
-                                                <small>Free shipping</small>
                                             </div>
                                         @endif
-                                        <form class="mt-2 p-0" method='post'
+
+                                            <form class="mt-2 p-0" method='post'
+
                                               action='{{route('card.destroy',['id' => $card->id])}}'>
+
                                             @method('delete')
                                             @csrf
                                             <button type="submit"

@@ -29,7 +29,7 @@ class CardController extends Controller
             $total['after_dis'] += $card->quantity * ($card->item->price - $card->item->price * $card->item->discount / 100);
         }
         $total['discount'] = $total['price'] - $total['after_dis'];
-        return view('pages.user.cart', ['total' => $total, 'cards' => $cards, 'order' => $order]);
+        return view('pages.order.cart', ['total' => $total, 'cards' => $cards, 'order' => $order]);
     }
 
     public function store(Request $request)

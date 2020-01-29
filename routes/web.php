@@ -1,16 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Auth::routes(['verify' => true]);//by email
+
+Route::get('/changePassword','Auth\ChanePasswordController@editPassword')->name('changePassword');
+Route::post('/changePassword','Auth\ChanePasswordController@changePassword')->name('changePassword');
+Route::get('/EditProfile','Auth\EditProfileController@edit')->name('editProfile');
+Route::post('/EditProfile','Auth\EditProfileController@update')->name('editProfile');
+
+
 Route::resources([
     'item' => 'ItemController',
     'news' => 'NewsController'
@@ -18,8 +15,7 @@ Route::resources([
 Route::get('/admin/items', 'ItemController@admin_index')->name('item.admin_index');
 
 
-Route::get('/', 'HomeController@welcome')->name('welcome');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@home')->name('home');
 
 
 Route::resource('category', 'CategoryController')->except(['show']);

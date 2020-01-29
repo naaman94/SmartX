@@ -29,28 +29,20 @@
                 <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="/storage/storage/items/{{$item->image}}" alt="">
                     <div class="card-body">
-                        <h3 class="card-title">{{$item->name}}</h3>
-                        <h6>Category : {{$item->category->name}}</h6>
-                        @if($item->discount==0)
-                            <h4>{{$item->price}} JD</h4>
-                        @else
-                            <h4 style="text-decoration: line-through;display: inline">{{$item->price}} JD</h4>
-                            <h4 style="display: inline; color: red">{{$item->price-$item->price*$item->discount/100}}
-                                JD</h4>
-                            <h5 class="p-1 my-2" style="display:inline; color: red ; border:2px solid red;"> you
-                                save {{intval($item->discount)}} % </h5>
-                        @endif
+                        <h1>{{$item->name}}</h1>
+                        <h6>{{$item->category->name}}</h6>
+
                         <div class="row justify-content-between">
-                            <small class="col">{{$item->status}}</small>
+                            <small class="col mt-2">{{$item->status}}</small>
+                            @if($item->discount!=0)
+                                <h5 class="p-1 " style="display:inline; color: red ; border:1px solid red;"> you
+                                    save {{intval($item->discount)}} % </h5>
+                            @endif
                             <small class="col mr-2 text-right"> SKU : {{$item->sku}}</small>
                         </div>
-                        <small>{{$item->short_description}}</small>
-
                         <hr>
-
                         <br>
                         <h4>Description :</h4>
-
                         <p class="card-text">{{$item->description}}</p>
                     </div>
                 </div>
@@ -81,7 +73,14 @@
                                        value="1"
                                        name="quantity" min=1 max=100>
                             </div>
+                            @if($item->short_description)
+                                <h6 class=" col mt-2 text-success">* {{$item->short_description}}</h6>
+                            @elseif($item->discount!=0)
+                                <h6 class=" col mt-2 text-danger">* you
+                                    save {{intval($item->discount)}} % </h6>
+                            @endif
                             <hr>
+
                             <h4 class="col" style="display: inline ">Total Price </h4>
                             <h5 id="T_prise" class="col" style="display: inline "></h5>
                             <input type="hidden" value="{{$item->id}}" name="item_id">
@@ -89,7 +88,7 @@
                                     class="fas fa-cart-plus"></i> Add to Cart
                             </button>
                         </form>
-                        @else
+                    @else
                         <a class="btn btn-primary btn-lg btn-block mt-2" href="{{ route('mycart') }}">
                             <i class="fas fa-shopping-cart"></i> View Cart</a>
                     @endif
