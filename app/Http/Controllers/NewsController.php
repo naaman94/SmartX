@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use App\News;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Illuminate\Http\Request;
 
@@ -22,9 +24,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
-//        $news = News::all()->take(10);//return the top news art
-        return view('pages.news.all_news', compact("news"));
+        $ads = Ad::where("show_in_items", true)->orderBy('created_at', 'DESC')->take(3)->get();
+        $news = News::orderBy('created_at', 'DESC')->paginate(10);
+        return view('pages.news.index', compact(["news", "ads"]));
     }
 
     /**
@@ -35,6 +37,7 @@ class NewsController extends Controller
     public function create()
     {
         return view('pages.news.create');
+
     }
 
     /**
@@ -47,25 +50,16 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        $attributes = $this->Validation($request);
+        $image = $request->image;
+        $ext = $image->getClientOriginalExtension();
+        $attributes['image'] = uniqid() . '.' . $ext;
+        $image->storeAs('public/storage/news', $attributes['image']);
+        News::create($attributes);
+        session()->flash("message", "the article : {$request->title} has been created successfully.");
+        return redirect()->route('news.index');
 
-//        $this->validate(request(), [
-//            'title' => 'required|unique:games',
-//            'body' => 'required',
-//            'image' => 'required',
-//        ]);
 
-        $filename = "no_img_news.jpg";
-        if ($request->hasfile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/storage/news_img/' . $filename));
-        }
-        News::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'image' => $filename]);;
-
-        return redirect('/news');
     }
 
     /**
@@ -74,9 +68,9 @@ class NewsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        return view('pages.news.news', ['data' => News::findOrFail($id)]);
+        return view('pages.news.show', ['article' => $news]);
     }
 
     /**
@@ -85,9 +79,9 @@ class NewsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        return view('pages.news.edit', ['data' => News::findOrFail($id)]);
+        return view('pages.news.edit', ['article' => $news]);
     }
 
     /**
@@ -97,31 +91,36 @@ class NewsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        $image = $request->file('image');
-        $filename = $image->getClientOriginalName();
-        if ( $filename!="no_img_news.jpg"&& $filename!=item::find($id)->get()->image) {//ok here chech the get function
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save(public_path('/uploads/news_img/' . $filename));
+        $attributes = $this->Validation($request);
+        $attributes['image']=$news->image;
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $ext = $image->getClientOriginalExtension();
+            $attributes['image'] = uniqid() . '.' . $ext;
+            $image->storeAs('public/storage/news', $attributes['image']);
+            Storage::delete("public/storage/news/$news->image");
         }
-        News::find($id)->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'image' => $filename ]);
-        return redirect()->route('news.show', ['id' => $id]);
+        $news->update($attributes);
+
+        return redirect()->route('news.show', ['id' => $news]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        News::destroy($id);
-        return redirect()->route('item.index');
-//        return redirect('News')->with('success', 'Data is successfully deleted');
+        Storage::delete("public/storage/news/$news->image");
+        $news->delete();
+        session()->flash("message", "Article has been Deleted successfully.");
+        return redirect()->route('news.index');
+    }
+
+    public function Validation($request)
+    {
+        return request()->validate([
+            'title' => ['required', "string", 'min:3'],
+            'body' => ['required', "string", 'min:3'],
+            'image' => $request->input('org_image') ? 'image|max:5000' : 'required|image|max:5000'
+        ]);
     }
 }

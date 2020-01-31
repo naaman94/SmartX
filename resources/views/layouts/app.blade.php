@@ -29,7 +29,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top d-block mb-5" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}">  {{ config('app.name', 'Laravel') }}</a>
+            <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}"><span class="text-primary">S</span>mart<span class="text-primary">X</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@
                                     <a class="dropdown-item" href="/admin/items">
                                         <i class="fas fa-store-alt"></i> items
                                     </a>
-                                    <a class="dropdown-item" href="/admin/items">
+                                    <a class="dropdown-item" href="{{route('news.index')}}">
                                         <i class="far fa-newspaper"></i> News
                                     </a>
                                     <a class="dropdown-item" href="{{route('ads.index')}}">

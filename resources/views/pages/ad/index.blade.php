@@ -26,6 +26,9 @@
                     </div>
                     <div class="col-md-5">
                         <h3>{{$ad->title}}</h3>
+                        <hr>
+                        <h6 class=""> Posted on : {{$ad->created_at}}</h6>
+
                         @if($ad->show_in_home)
                             <h6 class="text-success">display in home</h6>
                         @else
@@ -43,45 +46,33 @@
                         @endif
 
 
-
                         <form class="container-fluid" method='post' action='{{route('ads.destroy',['id' => $ad->id])}}'>
                             @method('delete')
                             @csrf
                             <div class="row">
                                 <button type="submit"
-                                        onclick="return confirm('Are you sure you want to delete {{$ad->name}} ')"
+                                        onclick="return confirm('Are you sure you want to delete {{$ad->title}} ')"
                                         class="col-md-6 offset-md-6  float-right btn btn-danger btn-lg d-block my-1"><i
                                         class="far fa-trash-alt"></i>
                                     Delete
                                 </button>
                             </div>
                             <div class="row">
-                            <a href="/ads/{{$ad->id}}/edit"
-                               class="col-md-6 offset-md-6 float-right btn btn-warning btn-lg d-block my-1 "><i
-                                    class="far fa-edit"></i>Edit</a>
+                                <a href="/ads/{{$ad->id}}/edit"
+                                   class="col-md-6 offset-md-6 float-right btn btn-warning btn-lg d-block my-1 "><i
+                                        class="far fa-edit"></i>Edit</a>
                             </div>
                         </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
+                <hr style="  border-style: inset; border-color: black;  border-width: 1px;">
             @endforeach
         @else
             <div class="row mt-5"><h1 class="col text-center">you dont have any Ads yet</h1></div>
         @endif
         <div class="row justify-content-center">
-                {{$ads->links()}}
+            {{$ads->links()}}
         </div>
     </div>
 @endsection

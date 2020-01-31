@@ -129,8 +129,9 @@
                                 </div>
 
                                 <p class="m-0">The price include tax *</p>
-                                <p class="text-success">The price include delivery and installation</p>
+                                <p class="text-danger m-0"> <i class="far fa-money-bill-alt"></i> Cash on delivery *</p>
 
+                                <p class="text-success">The price include delivery and installation</p>
                                 <hr>
                                 <div class="row">
                                     <h3 class="col align-self-start">Total </h3>

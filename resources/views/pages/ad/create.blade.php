@@ -43,7 +43,7 @@
 
                         <div class="form-check col">
                             <input class="form-check-input @error('show_in_home') is-invalid @enderror" type="checkbox"
-                                   name="show_in[home]" value="{{ old('show_in_home') }}" id="show_in_home">
+                                   name="show_in[home]"  value="home" {{ (is_array(old('show_in')) && in_array("home", old('show_in')))?"checked":"" }} id="show_in_home">
                             <label class="form-check-label @error('show_in_home') is-invalid @enderror"
                                    for="show_in_home">
                                 Home
@@ -51,18 +51,18 @@
                         </div>
                         <div class="form-check col">
                             <input class="form-check-input @error('show_in_store') is-invalid @enderror" type="checkbox"
-                                   name="show_in[store]" value="{{ old('show_in_store') }}" id="show_in_store">
-                            <label class="form-check-label @error('show_in_store') is-invalid @enderror"
+                                   name="show_in[store]" value="store"  {{ (is_array(old('show_in')) && in_array("store", old('show_in')))?"checked":"" }} id="show_in_store">
+                            <label class="form-check-label  @error('show_in_store') is-invalid @enderror"
                                    for="show_in_store">
                                 Store
                             </label>
                         </div>
                         <div class="form-check col">
                             <input class="form-check-input @error('show_in_items') is-invalid @enderror" type="checkbox"
-                                   name="show_in[items]" value="{{ old('show_in_items') }}" id="show_in_items">
+                                   name="show_in[items]"  value="items" {{ (is_array(old('show_in')) && in_array("items", old('show_in')))?"checked":"" }} id="show_in_items">
                             <label class="form-check-label @error('show_in_items') is-invalid @enderror"
                                    for="show_in_items">
-                                Store
+                                items
                             </label>
                         </div>
                     </div>
@@ -86,8 +86,9 @@
                 }
             </script>
             <button type="submit" class="btn btn-success float-right mb-5"><i class="fas fa-plus"></i> Create</button>
-            <p><img id="output" width="300"/></p>
-        </form>
+            <div class="row justify-content-center">
+                <img class="col-lg-6 mt-2 " id="output" width="200" />
 
+            </div>        </form>
     </div>
 @endsection

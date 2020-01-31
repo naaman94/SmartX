@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use App\Card;
 use App\Category;
 use App\Item;
@@ -25,13 +26,15 @@ class ItemController extends Controller
 
     public function index()
     {
+        $ads = Ad::where("show_in_store", true)->orderBy('created_at', 'DESC')->take(3)->get();
+
         $categories = $this->categories;
         if (request("category") && request("category") != "all_item") {
             $items=Item::orderBy('name', 'ASC')->whereCategory_id(request("category"))->paginate(21);
         } else {
             $items = Item::orderBy('name', 'ASC')->paginate(21);
         }
-        return view('pages.items.index', compact(["categories", "items"]));
+        return view('pages.items.index', compact(["categories", "items","ads"]));
     }
     public function admin_index()
     {
@@ -66,6 +69,8 @@ class ItemController extends Controller
 
     public function show(Item $item)
     {
+        $ads = Ad::where("show_in_items", true)->orderBy('created_at', 'DESC')->take(3)->get();
+
         $categories = $this->categories;
         $user = Auth::user();
         if ($user) {
@@ -80,7 +85,7 @@ class ItemController extends Controller
         } else {
             $is_in_cart = null;
         }
-        return view('pages.items.show', compact(["categories", "item", "is_in_cart"]));
+        return view('pages.items.show', compact(["categories", "item", "is_in_cart",'ads']));
     }
 
 
@@ -106,7 +111,6 @@ class ItemController extends Controller
             Storage::delete("public/storage/items/$request->org_image");
             //this column has a default value so don't need to set it empty.
         }
-
         $item->update($attributes);
         session()->flash("message", "{$request->name} item has been successfully Edit.");
         return redirect()->route('item.show', ['id' => $item->id]);
@@ -122,10 +126,10 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         $this->authorize('delete', $item);
+        Storage::delete("public/storage/items/$item->image");
         $item->delete();
         session()->flash("message", "Item has been Successfully Deleted.");
         return redirect()->route('item.admin_index');
-
     }
 
 
