@@ -1,10 +1,10 @@
 # Smart X 
-##All about Internet of Things 
+### All about Internet of Things 
 
-##Description :
+## Description :
 Smart X is website that aims to provide the latest products related to automation and smart homes devices . Also smart x allows the user to control devices and see their status in the User Dashboard .
 
-##Main features of Smart X :
+## Main features of Smart X :
 
 The website  will contain many pages :
 1. Home page that contain IoT articles , news and latest products 
@@ -18,7 +18,7 @@ The website  will contain many pages :
 	- Add items to the basket and confirm the purchase 
 	- User dashboard (additional) to check the status for devices (like temperature , humidity ) 	and change the status of devices  ( like plugs and lights).
 
-##Technologies using in this project is :
+## Technologies using in this project is :
  **Front-End :** Java script  ,HTML ,CSS  .\
  **Back-End :** PHP , Laravel .\
  **Database :** MySQL .
