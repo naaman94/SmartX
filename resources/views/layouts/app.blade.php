@@ -21,15 +21,17 @@
 
 <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/NavBar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/other.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/hover.css') }}" rel="stylesheet">
 
 
 </head>
 <body>
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top d-block mb-5" id="mainNav">
+<div class="layout-wrapper" id="app">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top d-block" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}"><span class="text-primary">S</span>mart<span class="text-primary">X</span></a>
+            <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}"><span class="text-primary">S</span>mart<span
+                    class="text-primary">X</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ route('item.index') }}"><i
+                        <a class="nav-link js-scroll-trigger" href="{{ route('items.index') }}"><i
                                 class="fas fa-store"></i> Store</a>
                     </li>
                     @guest
@@ -63,10 +65,8 @@
                                     <i class="fas fa-crown"></i> Admin <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    {{--                                    <a class="dropdown-item" href="{{ url('/Admin') }}">--}}
-                                    {{--                                        <i class="fas fa-crown"></i> Admin Dashboard--}}
-                                    {{--                                    </a>--}}
+                                <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
+
                                     <a class="dropdown-item" href="/category">
                                         <i class="fas fa-list-ul"></i> Categories
                                     </a>
@@ -87,7 +87,7 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('mycart') }}">
+                            <a class="nav-link js-scroll-trigger " href="{{ route('mycart') }}">
                                 <i class="fas fa-shopping-cart"></i> My Cart</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -101,11 +101,8 @@
                                 <a class="dropdown-item" href="{{ route('order.index') }}">
                                     <i class="fas fa-boxes"></i> My Orders
                                 </a>
-                                <a class="dropdown-item" href="{{ route('changePassword') }}">
-                                    <i class="fas fa-key"></i> Change Password
-                                </a>
-                                <a class="dropdown-item" href="{{ route('editProfile') }}">
-                                    <i class="fas fa-user-edit"></i> Edit Profile
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                    <i class="far fa-user"></i> My Profile
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -127,9 +124,42 @@
         </div>
     </nav>
 
-    <main class="py-4 mt-4">
+    <main class="py-4 mt-4 layout-main">
         @yield('content')
     </main>
+    <footer class="bg-dark text-white">
+        <div class="container">
+            <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold text-light">
+                        <a class="text-white" href="/#aboutus">About us</a>
+                    </h6>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a class="text-white" href="/news">News and Articles</a>
+                    </h6>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a class="text-white" href="/store">Store</a>
+                    </h6>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a class="text-white" href="/#aboutus">Contact</a>
+                    </h6>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center py-3">© 2020 Copyright:
+            <a class="text-white" href="/">SmartX</a>
+        </div>
+    </footer>
+
 </div>
+
 </body>
 </html>

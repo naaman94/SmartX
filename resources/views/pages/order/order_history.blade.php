@@ -56,7 +56,7 @@
                         <div class="col-3 text-center">
                             {{substr($order->created_at,0,10)}}
                         </div>
-                        <div class="col-3 text-center">
+                        <div class="col-3 text-center text-success">
                             {{$order->status}}
                         </div>
                         <div class="col-2 text-center">
@@ -127,7 +127,7 @@
                 </div>
                 @else
 
-                    <div class="row mt-5"><h1 class="col text-center">you dont have any orders yet</h1></div>
+                    <div class="row mt-5"><h1 class="col text-center">you dont have any orders</h1></div>
                 @endif
 
             </div>

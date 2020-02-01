@@ -19,7 +19,7 @@ class ItemController extends Controller
 
     public function __construct()
     {
-        $this->categories= Category::orderBy('name', 'ASC')->get();
+        $this->categories = Category::orderBy('name', 'ASC')->get();
         $this->middleware('admin')->except(['index', 'show']);
         $this->middleware('auth')->except(['index', 'show']);
     }
@@ -27,26 +27,112 @@ class ItemController extends Controller
     public function index()
     {
         $ads = Ad::where("show_in_store", true)->orderBy('created_at', 'DESC')->take(3)->get();
-
         $categories = $this->categories;
-        if (request("category") && request("category") != "all_item") {
-            $items=Item::orderBy('name', 'ASC')->whereCategory_id(request("category"))->paginate(21);
-        } else {
-            $items = Item::orderBy('name', 'ASC')->paginate(21);
+        $sort_by_arr = ["Time: newly listed", "A to Z", "Z to A", "Price: lowest first", "Price: highest first"];
+        switch (request("sort_by")) {
+            case "A to Z":
+                $sort = "name";
+                $order = "ASC";
+                break;
+            case "Z to A":
+                $sort = "name";
+                $order = "DESC";
+                break;
+            case "Price: lowest first":
+                $sort = "price";
+                $order = "ASC";
+                break;
+            case "Price: highest first":
+                $sort = "price";
+                $order = "DESC";
+                break;
+            case "Time: newly listed":
+            default :
+                $sort = "created_at";
+                $order = "DESC";
+                break;
         }
-        return view('pages.items.index', compact(["categories", "items","ads"]));
+        if (request("category") && request("category") != "all_item") {
+            $items = Item::orderBy($sort, $order)->whereCategory_id(request("category"))->paginate(21);
+        } else {
+            $items = Item::orderBy($sort, $order)->paginate(21);
+        }
+        return view('pages.items.index', compact(["categories", "sort_by_arr", "items", "ads"]));
     }
+
     public function admin_index()
     {
         $categories = $this->categories;
-        $items = Item::orderBy('name', 'ASC')->paginate(15);;
-        return view('pages.items.admin_index', compact(["categories", "items"]));
+
+        $sort_by_arr = ["Time: newly listed",
+            "Time: the oldest",
+            "A to Z",
+            "Z to A",
+            "Price: lowest first",
+            "Price: highest first",
+            "Discount: highest first",
+            "Discount: lowest first",
+            "Status is Available",
+            "Status is Coming Soon",
+            "Status is Out of Stock"
+
+        ];
+        switch (request("sort_by")) {
+            case "A to Z":
+                $sort = "name";
+                $order = "ASC";
+                break;
+            case "Z to A":
+                $sort = "name";
+                $order = "DESC";
+                break;
+            case "Price: lowest first":
+                $sort = "price";
+                $order = "ASC";
+                break;
+            case "Price: highest first":
+                $sort = "price";
+                $order = "DESC";
+                break;
+            case "Discount: lowest first":
+                $sort = "discount";
+                $order = "ASC";
+                break;
+            case "Discount: highest first":
+                $sort = "discount";
+                $order = "DESC";
+                break;
+            case "Time: the oldest":
+                $sort = "created_at";
+                $order = "ASC";
+                break;
+            case "Status is Available":
+                $items = Item::whereStatus("Available")->orderBy("created_at", "DESC")->paginate(15);;
+                return view('pages.items.admin_index', compact(["categories", "sort_by_arr", "items"]));
+                break;
+            case "Status is Coming Soon":
+                $items = Item::whereStatus("Coming Soon")->orderBy("created_at", "DESC")->paginate(15);;
+                return view('pages.items.admin_index', compact(["categories", "sort_by_arr", "items"]));
+                break;
+            case "Status is Out of Stock":
+                $items = Item::whereStatus("Out of Stock")->orderBy("created_at", "DESC")->paginate(15);;
+                return view('pages.items.admin_index', compact(["categories", "sort_by_arr", "items"]));
+                break;
+            case "Time: newly listed":
+            default :
+                $sort = "created_at";
+                $order = "DESC";
+                break;
+        }
+
+        $items = Item::orderBy($sort, $order)->paginate(15);;
+        return view('pages.items.admin_index', compact(["categories", "sort_by_arr", "items"]));
     }
 
 
     public function create()
     {
-        return view('pages.items.create', ['categories' =>$this->categories]);
+        return view('pages.items.create', ['categories' => $this->categories]);
     }
 
 
@@ -85,7 +171,7 @@ class ItemController extends Controller
         } else {
             $is_in_cart = null;
         }
-        return view('pages.items.show', compact(["categories", "item", "is_in_cart",'ads']));
+        return view('pages.items.show', compact(["categories", "item", "is_in_cart", 'ads']));
     }
 
 
@@ -105,11 +191,9 @@ class ItemController extends Controller
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();
             $attributes['image'] = uniqid() . '.' . $ext;
-            //upload the image
             $image->storeAs('public/storage/items', $attributes['image']);
             //delete the previous image.
             Storage::delete("public/storage/items/$request->org_image");
-            //this column has a default value so don't need to set it empty.
         }
         $item->update($attributes);
         session()->flash("message", "{$request->name} item has been successfully Edit.");
@@ -143,8 +227,8 @@ class ItemController extends Controller
             'image' => 'nullable|image|max:5000',
             'price' => ['required', 'numeric', 'integer'],
             'discount' => ['nullable', 'numeric', 'between:0,100'],
-            'status' => ['required', 'string','in:Available,Coming Soon,Out of Stock'],
-            'category_id' => ['required',"exists:categories,id"]
+            'status' => ['required', 'string', 'in:Available,Coming Soon,Out of Stock'],
+            'category_id' => ['required', "exists:categories,id"]
         ]);
     }
 }

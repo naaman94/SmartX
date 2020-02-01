@@ -62,7 +62,7 @@
                                    name="show_in[items]"  value="items" {{ (is_array(old('show_in')) && in_array("items", old('show_in')))?"checked":"" }} id="show_in_items">
                             <label class="form-check-label @error('show_in_items') is-invalid @enderror"
                                    for="show_in_items">
-                                items
+                                items & news
                             </label>
                         </div>
                     </div>

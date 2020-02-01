@@ -11,8 +11,23 @@
         @endif
         <div class="row justify-content-between">
             <h1 class="col-4"><i class="fas fa-ad"></i> Ads in Website</h1>
-            <a class="btn btn-success my-1 " href="{{route("ads.create")}}"><i class="fas fa-plus"></i> Add</a>
         </div>
+            <div class="row justify-content-end">
+                <a class="btn btn-success  my-1 mb-2 mx-2" href="{{route("ads.create")}}"><i class="fas fa-plus"></i> Add</a>
+                <div class=" btn-group ">
+                    <button type="button" class="btn btn-secondary  my-1 mb-2 dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        {{isset($_GET['sort_by'])?$_GET['sort_by']:"Sorting By"}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @foreach($sort_by_arr as $data)
+                            <a class="dropdown-item btn {{isset($_GET['sort_by'])?$_GET['sort_by']==$data?"bg-info disabled ":"":$data=="Time: newly listed"?"bg-info disabled ":""}}}"
+                               href="{{route("ads.index",['sort_by'=>$data])}}">
+                                {{$data}}</a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
         @if($ads->total()!=0)
 
@@ -69,7 +84,7 @@
                 <hr style="  border-style: inset; border-color: black;  border-width: 1px;">
             @endforeach
         @else
-            <div class="row mt-5"><h1 class="col text-center">you dont have any Ads yet</h1></div>
+            <div class="row mt-5"><h1 class="col text-center">you dont have any Ads</h1></div>
         @endif
         <div class="row justify-content-center">
             {{$ads->links()}}

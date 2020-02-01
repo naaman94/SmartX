@@ -46,13 +46,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $attributes = request()->validate([
             'name' => ['required', 'unique:categories', 'min:3'],
             'description' => ['string', 'nullable']
 
         ]);
-
         Category::create($attributes);
         session()->flash("message", "{$request->name} category has been created.");
         return redirect()->route('category.index');

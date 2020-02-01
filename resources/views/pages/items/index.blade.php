@@ -1,19 +1,39 @@
 @extends('layouts.app')
-@section('header')
-    <link href="{{ asset('css/NavBar.css') }}" rel="stylesheet">
-@endsection
+
 @section('content')
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-3">
-                <h1>Categories</h1>
+                <div class="mt-4 row">
+                    <h5 class="col mt-2">Sort by </h5>
+
+                    <div class="btn-group col ">
+
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            {{isset($_GET['sort_by'])?$_GET['sort_by']:"Time: newly listed"}}
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            @foreach($sort_by_arr as $data)
+                                <a class="dropdown-item btn {{isset($_GET['sort_by'])?$_GET['sort_by']==$data?"bg-info disabled ":"":$data=="Time: newly listed"?"bg-info disabled ":""}}}"
+                                   href="{{route("item.index",['sort_by'=>$data,'category'=> isset($_GET['category'])?$_GET['category']:"all_item"])}}">
+                                    {{$data}}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="mt-2">Categories</h1>
                 <div class="list-group">
-                    <a href="{{route("item.index",['category'=>"all_item"])}}" class="list-group-item">All items</a>
+                    <a href="{{route("item.index")}}"
+                       class="list-group-item {{!isset($_GET['category'])?"  bg-info disabled":""}}">All items</a>
                     @foreach($categories as $category)
                         <a href="{{route("item.index",['category'=>$category->id])}}"
-                           class="list-group-item">{{$category->name}}</a>
+                           class="list-group-item {{isset($_GET['category'])?$_GET['category']==$category->id?"bg-info disabled ":"":""}}}">{{$category->name}}</a>
                     @endforeach
                 </div>
+
             </div>
             <div class="col-lg-9">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
@@ -40,7 +60,7 @@
 
                 <div class="row">
                     @forelse($items  as $item)
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-4 col-md-6 mb-4 hvr-grow">
                             <div class="card h-100">
                                 <a href="/item/{{$item->id}}">
                                     <img class="card-img-top" src="/storage/storage/items/{{$item->image}}" alt=""
@@ -69,7 +89,6 @@
 
                                     @endif
 
-                                    {{--                                    <p class="card-text">{{Illuminate\Support\Str::limit($item->description, 150, ' ...')}}</p>--}}
                                 </div>
                                 <div class="card-footer ">
                                     <div class="row justify-content-around">
@@ -79,7 +98,7 @@
                                                 <input type="hidden" value="1" name="quantity">
                                                 <input type="hidden" value="{{$item->id}}" name="item_id">
                                                 <button type="submit" class="btn btn-sm btn-outline-success"><i
-                                                        class="fas fa-cart-plus"></i> Add to Cart
+                                                        class="fas fa-cart-plus "></i> Add to Cart
                                                 </button>
                                             </form>
                                         @else
@@ -95,17 +114,13 @@
                     @endforelse
 
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     {{$items->links()}}
                 </div>
             </div>
-            <!-- /.col-lg-9 -->
 
 
         </div>
-        <!-- /.row -->
 
     </div>
-
 @endsection

@@ -113,7 +113,6 @@
                 </div>
                 <div class="col-xl-3">
 
-                    <!-- Search Widget -->
                     <div class="card mb-4">
                         <div class="card-body">
                             <a href="{{route('order.create')}}" class="btn btn-primary btn-lg btn-block">Go to

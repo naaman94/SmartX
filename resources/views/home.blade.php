@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
         <div class="carousel-inner">
@@ -28,13 +29,14 @@
         <div class="row">
 
             @foreach($news as $article)
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-success h-100">
+                <div class="col-lg-4 mb-4 hvr-grow    ">
+                    <div class="card border-success h-100 shadow hvr-underline-from-center">
                         <h4 class="card-header">{{$article->title}}</h4>
                         <div class="card-body">
                             <a href="{{route("news.show",["id"=>$article->id])}}">
-                                <img class="img-fluid rounded mb-3" src="/storage/storage/news/{{$article->image}}"
-                                 alt=""></a>
+                                <img class="img-fluid rounded mb-3 hvr-round-corners"
+                                     src="/storage/storage/news/{{$article->image}}"
+                                     alt=""></a>
                             <p class="card-text">{{\Illuminate\Support\Str::limit($article->body, 300)}}</p>
                         </div>
                         <div class="card-footer">
@@ -44,16 +46,19 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+        <div class="row">
+            <a class="btn btn-link col float-right btn-lg" href="{{route("news.index")}}">See more Article and News</a>
 
         </div>
         <h2 class="my-4 text-center">New Items</h2>
 
         <div class="row">
             @foreach($items as $item)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card border-danger h-100">
+                <div class="col-lg-4 col-md-6 mb-4 hvr-grow  ">
+                    <div class="card border-danger h-100 shadow hvr-underline-reveal hvr-round-corners ">
                         <a href="/item/{{$item->id}}">
-                            <img class="card-img-top" src="/storage/storage/items/{{$item->image}}" alt=""
+                            <img class="card-img-top " src="/storage/storage/items/{{$item->image}}" alt=""
                                  height="300" width="150">
                         </a>
                         <div class="card-body">
@@ -101,10 +106,16 @@
             @endforeach
         </div>
 
-        <div class="row">
+        <div id="aboutus" class="row mt-5">
             <div class="col-lg-6">
-                <h2>About US</h2>
-                <p>The first site in Jordan specialized in IOT</p>
+                <h1>About Us</h1>
+                <p>The first site in Jordan specialized in IOT
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
                 <h2>Contact US</h2>
                 @if(session("message"))
                     <div class="alert alert-success">
@@ -124,26 +135,30 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Enter Your Name</label>
-                        <input type="text" name="name" class="form-control" value=""/>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                               value=""/>
                     </div>
                     <div class="form-group">
                         <label>Enter Your Email</label>
-                        <input type="text" name="email" class="form-control" value=""/>
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
+                               value=""/>
                     </div>
                     <div class="form-group">
                         <label>Enter Your Message</label>
-                        <textarea name="message" class="form-control"></textarea>
+                        <textarea name="message" class="form-control @error('message') is-invalid @enderror"></textarea>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" name="send" class="btn btn-info float-right" value="Send"/>
+                    <div class="form-group ">
+                        <input type="submit" name="send" class="btn btn-info mb-3 float-right" value="Send"/>
                     </div>
                 </form>
 
             </div>
-            <div class="col-lg-6">
-                <iframe width="600" height="400" id="gmap_canvas" class="embed-responsive-item"
-                        src="https://maps.google.com/maps?q=Orange%20Coding%20Academy&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <div class="col-lg-6 ">
+                <div class="embed-responsive embed-responsive-1by1">
+                    <iframe class="embed-responsive-item"
+                            src="https://maps.google.com/maps?q=Orange%20Coding%20Academy&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                </div>
+
             </div>
         </div>
 

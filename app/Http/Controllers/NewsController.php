@@ -24,9 +24,26 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $sort_by_arr = ["Time: newly listed", "A to Z", "Z to A"];
+        switch (request("sort_by")) {
+            case "A to Z":
+                $sort = "title";
+                $order = "ASC";
+                break;
+            case "Z to A":
+                $sort = "title";
+                $order = "DESC";
+                break;
+            case "Time: newly listed":
+            default :
+                $sort = "created_at";
+                $order = "DESC";
+                break;
+        }
+
         $ads = Ad::where("show_in_items", true)->orderBy('created_at', 'DESC')->take(3)->get();
-        $news = News::orderBy('created_at', 'DESC')->paginate(10);
-        return view('pages.news.index', compact(["news", "ads"]));
+        $news = News::orderBy($sort, $order)->paginate(10);
+        return view('pages.news.index', compact(["news","sort_by_arr", "ads"]));
     }
 
     /**
@@ -70,7 +87,8 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('pages.news.show', ['article' => $news]);
+        $ads = Ad::where("show_in_items", true)->orderBy('created_at', 'DESC')->take(3)->get();
+        return view('pages.news.show', ['article' => $news,"ads"=>$ads]);
     }
 
     /**
@@ -94,7 +112,7 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $attributes = $this->Validation($request);
-        $attributes['image']=$news->image;
+        $attributes['image'] = $news->image;
         if ($request->hasFile('image')) {
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();

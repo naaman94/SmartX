@@ -32,8 +32,59 @@ class OrderController extends Controller
 
     public function admin_index()
     {
-        $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart"])->orderBy('created_at', 'DESC')->paginate(20));
-        return view('pages.order.admin_order', ['orders' => $orders, 'status_form_array' => $this->status_form_array]);
+        $sort_by_arr = ["Time: newly listed",
+            "Time: the oldest",
+            "ID lowest first",
+            "ID highest first",
+            "Status is Order Processing",
+            "Status is Order Shipping",
+            "Status is Order Delivered",
+            "Status is Order Reject",
+            "Other status"
+        ];
+        switch (request("sort_by")) {
+            case "ID lowest first":
+                $sort = "id";
+                $order = "ASC";
+                break;
+            case "ID highest first":
+                $sort = "id";
+                $order = "DESC";
+                break;
+
+            case "Time: the oldest":
+                $sort = "created_at";
+                $order = "ASC";
+                break;
+            case "Status is Order Processing":
+                $orders = $this->Total_price_Orders(Order::whereStatus("Order Processing")->orderBy("created_at", "DESC")->paginate(20));
+                return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
+                break;
+            case "Status is Order Shipping":
+                $orders = $this->Total_price_Orders(Order::whereStatus("Order Shipping")->orderBy("created_at", "DESC")->paginate(20));
+                return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
+                break;
+            case "Status is Order Delivered":
+                $orders = $this->Total_price_Orders(Order::whereStatus("Order Delivered")->orderBy("created_at", "DESC")->paginate(20));
+                return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
+                break;
+            case "Status is Order Reject":
+                $orders = $this->Total_price_Orders(Order::whereStatus("Order Reject")->orderBy("created_at", "DESC")->paginate(20));
+                return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
+                break;
+            case "Other status":
+                $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart","Order Processing","Order Shipping","Order Delivered","Order Reject"])->orderBy("created_at", "DESC")->paginate(20));
+                return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
+                break;
+            case "Time: newly listed":
+            default :
+                $sort = "created_at";
+                $order = "DESC";
+                break;
+        }
+
+        $orders = $this->Total_price_Orders(Order::whereNotIn('status', ["cart"])->orderBy($sort, $order)->paginate(20));
+        return view('pages.order.admin_order', ['sort_by_arr' => $sort_by_arr,'orders' => $orders, 'status_form_array' => $this->status_form_array]);
     }
 
     /**

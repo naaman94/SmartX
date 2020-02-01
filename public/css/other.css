@@ -1,0 +1,31 @@
+.columns.content-area{border:1px solid #111;padding:0}
+.columns.sidebar{border:1px solid #111;padding:0}
+.columns.left-nav{padding:0}
+.icon-bar.vertical.five-up{width:100%}
+body {
+    background-color: white;
+}
+/*.footer {*/
+/*    position: fixed;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    background-color: red;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*}*/
+.blog-footer {
+    padding: 2.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+.layout-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.layout-main {
+    flex: 1;
+}

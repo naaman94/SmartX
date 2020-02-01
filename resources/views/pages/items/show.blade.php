@@ -26,8 +26,9 @@
 
         <div class="row">
             <div class="col-lg-9">
+                <img class="card-img-top img-fluid hvr-round-corners" src="/storage/storage/items/{{$item->image}}" alt="">
+
                 <div class="card mt-4">
-                    <img class="card-img-top img-fluid" src="/storage/storage/items/{{$item->image}}" alt="">
                     <div class="card-body">
                         <h1>{{$item->name}}</h1>
                         <h6>{{$item->category->name}}</h6>
@@ -86,16 +87,28 @@
                             <h4 class="col" style="display: inline ">Total Price </h4>
                             <h5 id="T_prise" class="col" style="display: inline "></h5>
                             <input type="hidden" value="{{$item->id}}" name="item_id">
-                            <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-2"><i
+                            <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-2 hvr-radial-in"><i
                                     class="fas fa-cart-plus"></i> Add to Cart
                             </button>
                         </form>
                     @else
-                        <a class="btn btn-primary btn-lg btn-block mt-2" href="{{ route('mycart') }}">
+                        @if($item->short_description)
+                            <h6 class=" col mt-2 text-success">* {{$item->short_description}}</h6>
+                        @elseif($item->discount!=0)
+                            <h6 class=" col mt-2 text-danger">* you
+                                save {{intval($item->discount)}} % </h6>
+                        @endif
+                        <a class="btn btn-primary btn-lg btn-block mt-2 hvr-push" href="{{ route('mycart') }}">
                             <i class="fas fa-shopping-cart"></i> View Cart</a>
                     @endif
                 @else
-                    <h4 class="col">{{$item->status}} </h4>
+                    @if($item->short_description)
+                        <h6 class=" col mt-2 text-success">* {{$item->short_description}}</h6>
+                    @elseif($item->discount!=0)
+                        <h6 class=" col mt-2 text-danger">* you
+                            save {{intval($item->discount)}} % </h6>
+                    @endif
+                    <h2 class="col text-center mt-2">{{$item->status}} </h2>
                 @endif
                 <br>
                 @can('viewAny',App\Item::class)
@@ -117,12 +130,7 @@
                         </form>
                     </div>
                 @endcan
-                {{--                <div class="list-group">--}}
-                {{--                    <a href="/item" class="list-group-item">All items</a>--}}
-                {{--                    @foreach($categories as $category)--}}
-                {{--                        <a href="{{$category->id}}" class="list-group-item">{{$category->name}}</a>--}}
-                {{--                    @endforeach--}}
-                {{--                </div>--}}
+
             </div>
         </div>
         <script>

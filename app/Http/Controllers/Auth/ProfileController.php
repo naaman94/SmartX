@@ -9,21 +9,33 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class EditProfileController extends Controller
+class ProfileController extends Controller
 {
+
     protected $state = ["Amman", "Ajlun", "Al Aqabah", "Al Balqa'", "Al Karak", "Al Mafraq", "At Tafilah", "Az Zarqa'", "Irbid", "Jarash", "Ma'an", "Madaba"];
 
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin')->only("show");
+
+    }
+    public function index()
+    {
+       $user = Auth::user();
+        return view('auth.profile', ["user" => $user]);
     }
 
+    public function show($id)
+    {
+        $user= User::findOrFail($id);
+        return view('auth.profile', ["user" => $user]);
+
+    }
     public function edit()
     {
         $user = Auth::user();
-
         return view('auth.EditProfile', ["user" => Auth::user(), "states" => $this->state]);
-
     }
 
     public function update(Request $request)

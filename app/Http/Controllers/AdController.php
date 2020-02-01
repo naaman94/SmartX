@@ -19,8 +19,43 @@ class AdController extends Controller
 
     public function index()
     {
-        $ads = Ad::orderBy('created_at', 'DESC')->paginate(10);
-        return view('pages.ad.index', compact("ads"));
+        $sort_by_arr = ["Time: newly listed",
+            "A to Z",
+            "Z to A",
+            "Display in Home",
+            "Display in Store",
+            "Display in Items and News"
+        ];
+        switch (request("sort_by")) {
+            case "A to Z":
+                $sort = "title";
+                $order = "ASC";
+                break;
+
+            case "Z to A":
+                $sort = "title";
+                $order = "DESC";
+                break;
+            case "Display in Home":
+                $ads = Ad::where("show_in_home", true)->orderBy("created_at", "DESC")->paginate(10);
+                return view('pages.ad.index', compact(["ads", "sort_by_arr"]));
+                break;
+            case "Display in Store":
+                $ads = Ad::where("show_in_store", true)->orderBy("created_at", "DESC")->paginate(10);
+                return view('pages.ad.index', compact(["ads", "sort_by_arr"]));
+                break;
+            case "Display in Items and News":
+                $ads = Ad::where("show_in_items", true)->orderBy("created_at", "DESC")->paginate(10);
+                return view('pages.ad.index', compact(["ads", "sort_by_arr"]));
+                break;
+            case "Time: newly listed":
+            default :
+                $sort = "created_at";
+                $order = "DESC";
+                break;
+        }
+        $ads = Ad::orderBy($sort, $order)->paginate(10);
+        return view('pages.ad.index', compact(["ads", "sort_by_arr"]));
     }
 
     public function create()
@@ -56,13 +91,11 @@ class AdController extends Controller
 
     public function update(Request $request, Ad $ad)
     {
-//        return $request;
-
         $attributes = $this->Validation($request);
         $attributes['show_in_home'] = in_array('home', $request->show_in);
         $attributes['show_in_store'] = in_array('store', $request->show_in);
         $attributes['show_in_items'] = in_array('items', $request->show_in);
-        $attributes['image']=$ad->image;
+        $attributes['image'] = $ad->image;
         if ($request->hasFile('image')) {
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();
@@ -70,8 +103,6 @@ class AdController extends Controller
             $image->storeAs('public/storage/ads', $attributes['image']);
             Storage::delete("public/storage/ads/$request->org_image");
         }
-//        return $attributes;
-
         $ad->update($attributes);
         session()->flash("message", "Ad {$request->title} has been edited successfully.");
         return redirect()->route('ads.index');
